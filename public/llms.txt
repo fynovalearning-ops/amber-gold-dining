@@ -1,0 +1,20 @@
+# Times Berwick
+
+> Modern Australian steakhouse in Berwick, Melbourne. Multi-award winning restaurant with 15+ years of history, serving premium steaks, pasta, seafood, and curated dining experiences.
+
+## Pages
+
+- [Home](/): Overview of Times Berwick, featuring signature dishes, awards, and dining experiences.
+- [Menu](/menu): A-la-carte menu including raw & cold, starters, skewers, mains, sides, and desserts.
+- [Functions](/functions): Private dining and event packages for groups and celebrations.
+- [What's On](/whats-on): Current promotions, including Chef's Table, Date Night, rewards, and weeknight offers.
+- [Chef's Table](/chefs-table): Feed-me style shared dining experience with set menu options.
+- [Rewards](/rewards): Loyalty programme details and member benefits.
+- [Date Night](/date-night): $50 per person set menu and date night experience information.
+- [Contact](/contact): Location, opening hours, phone, and booking enquiries.
+- [Gallery](/gallery): Photo collection of dishes from the kitchen.
+
+## Optional
+
+- [Mother's Day](/mothers-day): Seasonal Mother's Day dining menu and booking information. Available only when the promotion is active.
+- [Father's Day](/fathers-day): Father's Day dining on Sunday 6 September with a reduced a-la-carte menu and gift cards. Available only when the promotion is active.
