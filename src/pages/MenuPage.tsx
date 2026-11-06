@@ -9,8 +9,24 @@ import steakImg from "@/assets/menu-hero-new.jpg";
 import cocktailsHeroImg from "@/assets/cocktails-hero.jpg";
 import oystersFaqImg from "@/assets/oysters-faq.jpg";
 import flameGrilledSkewersImg from "@/assets/flame-grilled-skewers.jpg";
-import sydneyRockOystersImg from "@/assets/sydney-rock-oysters.jpg";
+import sydneyRockOystersImg from "@/assets/oystersimage.jpg";
 import carnivoreBoardImg from "@/assets/carnivore-board-new.jpg";
+import rawAndColdImg from "@/assets/rawandfreshsection.jpg";
+import entreesectionImg from "@/assets/entreesection.jpg";
+import desertsectionImg from "@/assets/desertsection.jpg";
+import favoritesectionImg from "@/assets/favoritesections.jpg";
+import kidssectionImg from "@/assets/kidssection.jpg";
+import lunchsectionImg from "@/assets/lunchsectionimage.jpg";
+import lunchsection2Img from "@/assets/lunchsection.jpg";
+import pastarisotosectionImg from "@/assets/pastarisotosection.jpg";
+import pasatarisotosection2Img from "@/assets/pastarisotosectionimage.jpg";
+import pastasectionImg from "@/assets/pastasection.jpg";
+import ribsectionImg from "@/assets/ribssections.jpg";
+import sidessectionImg from "@/assets/sidessection.jpg";
+import skewerssectionImg from "@/assets/skewerssection.jpg";
+import skewerssection2Img from "@/assets/skewersection.jpg";
+import steaksectionImg from "@/assets/steakimagesection.jpg";
+
 import {
   aLaCarteSections,
   oysterItems,
@@ -23,6 +39,7 @@ import {
   wineSections,
   chefsTableCourses,
   ultimateDiningCourses,
+  christmasFeastCourses,
   setMenu1Courses,
   setMenu2Courses,
   beveragePackages,
@@ -76,11 +93,36 @@ const MenuItemRow = ({ item }: { item: MenuItem }) => (
 );
 
 // ─── Reusable Section Block ──────────────────────────
-const MenuSectionBlock = ({ section, index }: { section: MenuSection; index: number }) => {
-  const sectionImages: Record<string, string> = {
-    "Flame Grilled Skewers": flameGrilledSkewersImg,
-  };
-  const sideImage = sectionImages[section.title];
+type SectionImage = { src: string; zoom?: number; focus?: string };
+
+const alaCarteSectionImages: Record<string, SectionImage[]> = {
+  "O’Connor": [{ src: steaksectionImg, zoom: 1.3, focus: "55% 65%" }],
+  "Flamed Grilled Skewers (GF)": [{ src: skewerssectionImg }, { src: skewerssection2Img }],
+  "Legendary Ribs": [{ src: ribsectionImg }],
+  "Seasonal Favourites": [{ src: favoritesectionImg, zoom: 2.4, focus: "55% 65%" }],
+  "Pastas & Risottos": [{ src: pastarisotosectionImg }, { src: pastasectionImg }],
+  "Favourite Seasonal Sides": [{ src: sidessectionImg }],
+  "For Our Little Guests": [{ src: kidssectionImg }],
+  "Desserts": [{ src: desertsectionImg }],
+};
+
+const lunchSectionImages: Record<string, SectionImage[]> = {
+  "Entrée": [{ src: lunchsectionImg }],
+  "Mains": [{ src: lunchsection2Img }],
+  "Desserts": [{ src: desertsectionImg }],
+};
+
+// ─── Reusable Section Block ──────────────────────────
+const MenuSectionBlock = ({
+  section,
+  index,
+  images = alaCarteSectionImages,
+}: {
+  section: MenuSection;
+  index: number;
+  images?: Record<string, SectionImage[]>;
+}) => {
+  const sideImages = images[section.title] ?? [];
 
   const content = (
     <>
@@ -117,18 +159,33 @@ const MenuSectionBlock = ({ section, index }: { section: MenuSection; index: num
       className="mb-16 last:mb-0 scroll-mt-36 md:scroll-mt-32"
       id={section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
     >
-      {sideImage ? (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      {sideImages.length > 0 ? (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start lg:items-center">
           <div className="lg:col-span-7">{content}</div>
-          <div className="lg:col-span-5 lg:sticky lg:top-32">
-            <div className="aspect-[4/5] overflow-hidden">
-              <img
-                src={sideImage}
-                alt={`${section.title} at Times Berwick`}
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="lg:col-span-5 flex flex-col items-center gap-4">
+            {sideImages.map((img, k) => {
+              const focus = img.focus ?? "50% 50%";
+              return (
+                <div
+                  key={k}
+                  className={`w-full overflow-hidden ${
+                    sideImages.length > 1 ? "aspect-[4/3]" : "aspect-[4/5]"
+                  }`}
+                >
+                  <img
+                    src={img.src}
+                    alt={`${section.title} at Times Berwick`}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                    style={{
+                      objectPosition: focus,
+                      transformOrigin: focus,
+                      transform: img.zoom ? `scale(${img.zoom})` : undefined,
+                    }}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : (
@@ -186,7 +243,7 @@ const AlaCarteTab = () => (
   <div>
     <div className="mb-10 flex flex-wrap gap-3">
       <a
-        href="/Times-Berwick-A-La-Carte-Menu.pdf"
+        href="/Tsimes-Berwick-A-La-Carte-Menu.pdf"
         target="_blank"
         rel="noopener noreferrer"
         download
@@ -212,12 +269,19 @@ const AlaCarteTab = () => (
     </div>
 
     <ScrollReveal className="mb-16">
-      <h3 className="font-serif text-3xl md:text-4xl mb-1">Raw & Cold</h3>
+      <h3 className="font-serif text-3xl md:text-4xl mb-1">Raw & Fresh</h3>
       <div className="gold-divider max-w-16 mt-2 mb-6" />
 
       {rawAndColdItems.map((item, j) => (
         <MenuItemRow key={j} item={item} />
       ))}
+
+      <img
+            src={rawAndColdImg}
+            alt="Sydney rock oysters served on ice with red wine shallot dressing and lemon"
+            loading="lazy"
+            className="mt-4 w-full max-w-sm aspect-[4/3] object-cover rounded-sm shadow-md"
+          />
 
       {/* Oyster sub-heading */}
       <div className="mt-6">
@@ -245,11 +309,23 @@ const AlaCarteTab = () => (
           <MenuItemRow key={j} item={item} />
         ))}
       </div>
+      <img
+        src={entreesectionImg}
+        alt="Delicious entrée dish"
+        loading="lazy"
+        className="mt-4 w-full max-w-sm aspect-[4/3] object-cover rounded-sm shadow-md"
+      />
     </ScrollReveal>
 
-    {aLaCarteSections.map((section, i) => (
-      <MenuSectionBlock key={i} section={section} index={i} />
-    ))}
+    <ScrollReveal className="mb-16">
+      <h3 className="font-serif text-3xl md:text-4xl mb-1">TIMES’ SIGNATURE CUTS</h3>
+      <span className="text-muted-foreground text-sm italic mb-2 block">All of our steaks are glazed with our Times Signature umami basting for a flavorful finish.</span>
+      <span className="text-muted-foreground text-sm italic mb-2 block">Served with your choice of one side (chips / simple salad / mash)</span>
+      <div className="gold-divider max-w-16 mt-2 mb-6" />
+      {aLaCarteSections.map((section, i) => (
+        <MenuSectionBlock key={i} section={section} index={i} />
+      ))}
+    </ScrollReveal>
   </div>
 );
 
@@ -275,8 +351,8 @@ const LunchTab = () => (
     </div>
 
     {lunchSections.map((section, i) => (
-      <MenuSectionBlock key={i} section={section} index={i} />
-    ))}
+  <MenuSectionBlock key={i} section={section} index={i} images={lunchSectionImages} />
+))}
 
     {/* Lunch Packages — boxed section at the end */}
     <ScrollReveal className="mt-16 scroll-mt-36 md:scroll-mt-32" id="lunch-packages">
@@ -285,9 +361,10 @@ const LunchTab = () => (
           Lunch Packages
         </p>
         <p className="text-muted-foreground text-sm italic mb-2">{lunchPackages.subtitle}</p>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-2xl">
+        <p className="text-muted-foreground text-sm leading-relaxed mb-2 max-w-2xl">
           {lunchPackages.intro}
         </p>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-2xl">Served with a glass of carefully chosen house wine, beer, or soft drink.</p>
         <div className="gold-divider max-w-16 mb-6" />
         <div className="space-y-4">
           {lunchPackages.items.map((item, j) => (
@@ -406,7 +483,7 @@ const ChefsTableTab = () => (
           Times Sharing Experience
         </h3>
         <p className="font-serif text-2xl text-primary mb-6">
-          $99<span className="text-muted-foreground text-base"> per person</span>{" "}
+          $119<span className="text-muted-foreground text-base"> per person</span>{" "}
           <span className="text-muted-foreground text-sm">designed for 2 people</span>
         </p>
         <div className="gold-divider max-w-24 mb-8" />
@@ -429,14 +506,14 @@ const ChefsTableTab = () => (
           Premium Experience
         </p>
         <h3 className="font-serif text-4xl md:text-5xl mb-2">
-          4 Course Ultimate Dining Experience
+          Times Sharing Christmas Feast for 2 People
         </h3>
         <p className="font-serif text-2xl text-primary mb-6">
-          $99<span className="text-muted-foreground text-base"> per person</span>
+          $149<span className="text-muted-foreground text-base"> per person</span>
 
         </p>
         <div className="gold-divider max-w-24 mb-8" />
-        {ultimateDiningCourses.map((c, i) => (
+        {christmasFeastCourses.map((c, i) => (
           <CourseBlock
             key={i}
             course={c.course}

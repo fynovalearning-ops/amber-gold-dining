@@ -15,89 +15,97 @@ export type MenuSection = {
 
 // ===== À LA CARTE =====
 export const oysterItems: MenuItem[] = [
-  { name: "Sydney Rock Oysters", desc: "Prosecco mignonette, finger lime", price: "39 / 73", tag: "GF" },
+  { name: "Sydney Rock Oysters", desc: "Champagne mignonette. From the east coast of Australia", price: "39 / 73", tag: "GF" },
 ];
 
 export const rawAndColdItems: MenuItem[] = [
-  { name: "Wagyu Charcuterie", desc: "Mayura MB9+ Wagyu bresaola and salami, house pickles, aged cheddar", price: "29" },
-  { name: "Wagyu Tartare", desc: "Soy cured yolk, hand cut premium Wagyu Girello, traditional condiments, parmesan, potato crisp", price: "28", tag: "GF" },
+  { name: "Wagyu Tartare", desc: "Mayura wagyu MB7+, tartare dressing, free range yolk, crispy potato, garlic crisp", price: "28", tag: "GF" },
   { name: "Yellowtail Kingfish", desc: "Kombu cured yellowtail kingfish, citrus dressing, garlic crème fraîche, chilli, pickle shallots", price: "26", tag: "GF" },
 ];
 
 export const toBeginItems: MenuItem[] = [
-  { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary", price: "16", tag: "VG" },
-  { name: "Times Bruschetta", desc: "Avocado, Roma tomato, Spanish onion, basil with balsamic glaze, extra virgin olive oil, Grana Padano cheese on grilled sourdough", price: "18", tag: "VG, VO, GFO" },
-  { name: "Grilled Hokkaido Scallops", desc: "Café de Paris butter, parsley", price: "28", tag: "GF" },
-  { name: "Mushroom & Truffle Arancini", desc: "Black truffle aioli, parmesan cheese, Davidson plum", price: "19", tag: "VG" },
-  { name: "Fermented Chilli Prawns", desc: "Marinated Emerald tiger prawns & garlic, grilled dukkah bread", price: "28", tag: "GFO" },
+  { name: "Grilled Honey Fig & Bresaola", desc: "Stracciatella, thyme, vincotto, extra virgin olive oil on garlic sourdough", price: "28", tag: "VGO, GFO" },
+  { name: "Charred Octopus", desc: "Nduja, red pepper salsa, crispy shallots, kefir lime aioli", price: "29", tag: "GF" },
+  { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary", price: "17", tag: "VG" },
+  { name: "Times' Bruschetta", desc: "Avocado, Roma tomato, Spanish onion, basil with vincotto, extra virgin olive oil, Grana Padano cheese on grilled sourdough", price: "19", tag: "VG, VO, GFO" },
   { name: "Signature Fried Calamari", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs", price: "19" },
+  { name: "Mushroom & Truffle Arancini", desc: "Black truffle aioli, parmesan cheese, Davidson plum", price: "19", tag: "VG" },
   { name: "Hot Chicken Wings", desc: "Smoked black garlic and adobo sauce, furikake", price: "22", tag: "GFO" },
-  { name: "Signature Entrée Sharing Board", desc: "Chef's selection of Mushroom & Truffle Arancini, Hot Chicken Wings, Fried Calamari & Times Bruschetta", price: "68" },
+  { name: "Grilled Hokkaido Scallops", desc: "Café de Paris butter, parsley", price: "29", tag: "GF" },
+  { name: "Fermented Chilli Prawns", desc: "Marinated Emerald tiger prawns & garlic, grilled dukkah bread", price: "28", tag: "GFO" },
+  { name: "Signature Entrée Sharing Board", desc: "Chef's selection of Mushroom & Truffle Arancini, Hot Chicken Wings, Signature Fried Calamari & Times Bruschetta", price: "68" },
 ];
 
 export const aLaCarteSections: MenuSection[] = [
   {
-    title: "Steaks",
-    subtitle: "O'Connor — Premium Australian Beef from East Gippsland, Victoria. Grain Fed 150 Days.",
-    intro: "All steaks glazed with our Times Signature umami basting for a flavourful finish. Served with your choice of one side, chips OR simple salad OR mash.",
+    title: "O’Connor",
+    subtitle: "Premium Australian Beef from East Gippsland, Victoria. Grain Fed 150 Days.",
+    intro: "",
     items: [
-      { name: "Eye Fillet 200g MB2+", desc: "Recommended: Medium Rare", price: "62", tag: "GFO" },
-      { name: "Striploin 350g MB3+", desc: "Recommended: Medium Rare / Medium", price: "67", tag: "GFO" },
-      { name: "Rib-Eye 400g MB4+", desc: "Recommended: Medium", price: "89", tag: "GFO" },
-      { name: "T-Bone 800g MB3+", desc: "Recommended: Medium Rare / Medium", price: "96", tag: "GFO" },
+      { name: "Eye Fillet 200g MB2+", desc: "Recommended: Medium Rare", price: "64" },
+      { name: "Striploin 350g MB2+", desc: "Recommended: Medium Rare / Medium", price: "72" },
+      { name: "T-Bone 800g MB3+", desc: "Recommended: Medium Rare / Medium", price: "96" },
+      { name: "Rib-Eye 400g MB2+", desc: "Recommended: Medium", price: "89" },
     ],
   },
   {
     title: "Westholme Wagyu",
     subtitle: "Premium Australian Wagyu from Queensland's Gulf Country. Grain Fed 450 Days.",
     items: [
-      { name: "Striploin 300g MB5+", desc: "Recommended: Medium Rare / Medium", price: "89", tag: "GFO" },
-      { name: "Scotch Fillet 300g MB7+", desc: "Recommended: Medium Rare", price: "92", tag: "GFO" },
-      { name: "Rump 500g MB5+", desc: "Recommended: Medium Rare / Medium", price: "94", tag: "GFO" },
+      { name: "Striploin 300g MB5+", desc: "Recommended: Medium Rare / Medium", price: "89" },
+      { name: "Rump 500g MB5+", desc: "Recommended: Medium Rare / Medium", price: "94" },
+      { name: "Scotch Fillet 300g MB7+", desc: "Recommended: Medium Rare", price: "94" },
     ],
   },
   {
-    title: "Times Sharing Steaks",
-    subtitle: "Serves Two",
+    title: "O'Connor Dry Aged",
+    subtitle: "Aged with butter & thyme. From Gippsland, Victoria.",
     items: [
-      { name: "O'Connor Tomahawk 1.3kg MB3+", desc: "Grain fed 240 days. Served with Wagyu Roast Potatoes, simple salad & sprouting broccoli, and a choice of 2 sauces. Recommended: Medium Rare / Medium", price: "219" },
+      { name: "Prime Rib-Eye 600g MB4+", desc: "Recommended: Medium (Grassfed)", price: "156" },
+      { name: "Striploin on the Bone 400g MB4+", desc: "Recommended: Medium Rare (Grainfed)", price: "82" },
     ],
   },
   {
     title: "Sauces",
     items: [
       { name: "Creamy Mushroom", desc: "", price: "5" },
-      { name: "Fermented Chilli", desc: "", price: "5", tag: "GF" },
       { name: "Chimichurri", desc: "", price: "5", tag: "GF" },
-      { name: "Garlic & Herb Butter", desc: "", price: "5", tag: "GF" },
       { name: "Peppercorn", desc: "", price: "5" },
-      { name: "Bearnaise", desc: "", price: "5", tag: "GF" },
+      { name: "Garlic & Herb Butter", desc: "", price: "5", tag: "GF" },
+      { name: "Béarnaise", desc: "", price: "5", tag: "GF" },
+      { name: "Aioli", desc: "", price: "3" },
+      { name: "Fermented Chilli", desc: "", price: "6", tag: "GF" },
       { name: "Red Wine Jus", desc: "", price: "7" },
-      { name: "Mustard Selection", desc: "Dijon / Seeded / French / Hot English", price: "3", tag: "GF" },
     ],
   },
   {
-    title: "Seasonal Vegetables & Sides",
+    title: "Sharing Steak",
+    subtitle: "Serves Two",
     items: [
-      { name: "Wagyu Roast Potatoes", desc: "Roasted potatoes with rosemary, wagyu tallow, parmesan cheese & black truffle aioli", price: "16", tag: "GF" },
-      { name: "Honey Roasted Pumpkin", desc: "Chilli yoghurt, salsa verde, pomegranate, seasonal herbs & almond", price: "16", tag: "GF" },
-      { name: "Sprouting Broccoli", desc: "Ajo blanco, almond and crispy shallot pangrattato", price: "18", tag: "VG, VO" },
-      { name: "Brussels Sprouts", desc: "Burnt butter, hot honey glaze, pomegranate, herbs & crispy pancetta", price: "18", tag: "VGO, VO" },
-      { name: "Simple Salad", desc: "Mix leaves, heirloom tomato, cucumber, radish, onion, verjuice dressing, pecorino", price: "12", tag: "VO, GFO" },
-      { name: "Mash", desc: "", price: "12", tag: "VG, GF" },
-      { name: "Chips", desc: "", price: "10" },
+      { name: "O'Connor Tomahawk 1.3kg MB3+", desc: "Served with wagyu potato, simple salad & broccolini, with choice of any two sauces. Recommended: Medium Rare / Medium", price: "219" },
     ],
   },
   {
     title: "Times Carnivore Sharing Board",
-    subtitle: "Serves Two. Served with choice of two sides (chips / salad / mash) & choice of a sauce.",
+    subtitle: "Serves Two. Served with choice of two sides (chips / simple salad / mash) & one sauce.",
     items: [
-      { name: "Carnivore Board", desc: "Eye of rump (200g), choice of half pork or beef ribs, slow roasted pork belly, flame grilled half chicken", price: "142" },
+      { name: "Carnivore Board", desc: "Wagyu rump (200g), choice of half pork or beef ribs, slow roasted pork belly, flame grilled half chicken", price: "169" },
+    ],
+  },
+  {
+    title: "Flamed Grilled Skewers (GF)",
+    subtitle: "Served with a choice of one side, chips or salad, and a sauce.",
+    items: [
+      { name: "Peri Peri Chicken Thigh", desc: "Marinated w/ peri peri yoghurt, onion, capsicum, finished with peri peri glaze", price: "44", tag: "GF" },
+      { name: "Pork Belly", desc: "Glazed with Szechuan honey, almond, shallot crumb", price: "44", tag: "GF" },
+      { name: "Harissa Lamb", desc: "Marinated lamb fillet, pickled onion, red capsicum, lemon & rosemary glaze", price: "54", tag: "GF" },
+      { name: "Skewer Combo - Choice of Any Two", desc: "", price: "98" },
+      { name: "Skewer Combo - Choice of Any Three", desc: "", price: "142" },
     ],
   },
   {
     title: "Legendary Ribs",
-    subtitle: "Our ribs are slow cooked for 12 hours, glazed with homemade ribs basting for a flavourful finish. Served with your choice of one side, chips OR salad.",
+    subtitle: "Slow cooked for 12 hours, glazed with homemade ribs basting for a flavourful finish. Served with your choice of one side, chips OR salad.",
     items: [
       { name: "Pork Ribs - Half Rack", desc: "", price: "57", tag: "GFO" },
       { name: "Pork Ribs - Full Rack", desc: "", price: "79", tag: "GFO" },
@@ -107,42 +115,40 @@ export const aLaCarteSections: MenuSection[] = [
     ],
   },
   {
-    title: "Signature Skewers",
-    subtitle: "Served with a choice of one side, chips or salad, and a sauce.",
-    items: [
-      { name: "Pork Belly", desc: "Slow cooked with Thai basil and chilli, onion, finished over the flame grill with Szechuan honey, almond and shallot crumb", price: "44", tag: "GF" },
-      { name: "Harissa Lamb", desc: "Marinated lamb fillet, onion & red capsicum, lemon & rosemary glaze, finished with pickled onion, fermented tomato seasoning", price: "54", tag: "GF" },
-      { name: "Wagyu Rump Cap", desc: "Rosemary and garlic, onion & capsicum, cooked over the flame grill, finished with peach & apricot glaze, Zhoug", price: "54", tag: "GF" },
-      { name: "Skewer Combo - Choice of Any Two", desc: "", price: "98" },
-      { name: "Skewer Combo - Choice of Any Three", desc: "", price: "142" },
-    ],
-  },
-  {
     title: "Seasonal Favourites",
     items: [
-      { name: "Slow Cooked Beef Cheek", desc: "Creamy potato mash, honey glazed carrot, kale, pickled onion, fried pancetta and red wine jus", price: "44", tag: "GF" },
-      { name: "Crispy Skinned Salmon", desc: "Saffron fregola with prawn meat, scallops, capers, lobster bisque, garlic, chilli, dill, cherry tomatoes, fresh verde", price: "46", tag: "GFO" },
-      { name: "Wagyu Burger", desc: "Mayura wagyu beef patty, lettuce, pickled cucumber, braised onions, tomato, burger sauce & melted cheese on toasted brioche bun, served with chips", price: "36", tag: "GFO" },
-      { name: "Classic Caesar Salad", desc: "Cos lettuce, bacon, anchovies, garlic croutons, parmesan cheese, tossed with creamy caesar dressing and soft boiled egg. +Chicken $6", price: "32", tag: "GFO" },
-      { name: "Flame Grilled Chicken", desc: "Katsu curry sauce, glazed with house fermented chilli, crispy curry leaves, grilled dukkah bread", price: "39", tag: "GFO" },
-      { name: "Nasi Goreng", desc: "Indonesian style fried rice with pork, chicken, prawn, green vegetables, chilli, coriander, bean sprout, fried egg & crispy shallots", price: "39", tag: "GFO" },
+      { name: "Slow Cooked Beef Cheek", desc: "Creamy mash, honey glazed carrot, kale, pickled onion, pancetta, red wine jus", price: "44", tag: "GF" },
+      { name: "Crispy Skin Barramundi", desc: "Baby potato, spinach, shallots, heirloom tomato, laksa sauce, fried curry leaves", price: "46", tag: "GFO" },
+      { name: "Flame Grilled Chicken", desc: "Fermented chilli glaze, romesco sauce, crispy kale, pickled chilli & shallot, served with chips", price: "39", tag: "GFO" },
+      { name: "Wagyu Burger", desc: "Lettuce, pickled cucumber, braised onions, tomato, burger sauce & melted cheese, served with chips", price: "36", tag: "GFO" },
+      { name: "Classic Caesar Salad", desc: "Cos lettuce, bacon, anchovies, garlic croutons, parmesan, creamy caesar dressing and soft boiled egg. +Chicken $6", price: "32", tag: "GFO" },
+      { name: "Nasi Goreng", desc: "Indonesian style fried rice with pork, chicken, prawn, green vegetables, chilli, coriander, bean sprout, fried egg, crispy shallots", price: "39", tag: "GFO" },
+      { name: "Duo of Duck", desc: "Pot-roasted duck leg & breast, cauliflower purée, brussels sprout, cherry jus", price: "59" },
     ],
   },
   {
-    title: "Housemade Pastas",
+    title: "Pastas & Risottos",
     items: [
-      { name: "Mushroom and Ricotta Tortellini", desc: "Emerald prawn, sage brown butter, raisins, pine nuts", price: "44", tag: "VGO" },
-      { name: "Lobster Linguine", desc: "Half lobster, prawn, scallops, calamari, capers, confit cherry tomato, dill, hint of chilli, bisque reduction", price: "54", tag: "GFO" },
-      { name: "Carbonara", desc: "Pancetta, free range egg yolk, spring onion, Grana Padano cheese, black cracked pepper and pecorino with house made linguine", price: "42", tag: "GFO" },
-      { name: "Times Signature Gnocchi", desc: "Butter fried gnocchi with roasted pumpkin, sage cream sauce with a touch of Napoli, garlic and parmesan cheese", price: "42", tag: "VG" },
-      { name: "Lamb Ragu Pappardelle", desc: "Slow cooked lamb shoulder in rich San Marzano tomato for 8 hours, hint of fresh chilli, olives, chimichurri, Grana Padano cheese", price: "44", tag: "GFO" },
+      { name: "Blue Spanner Crab Risotto", desc: "Crab meat, scallops, crayfish bisque, prawn meat, chilli, confit garlic, chives, extra virgin olive oil", price: "46", tag: "GF" },
+      { name: "Lobster Linguine", desc: "Half lobster, prawns, calamari, scallops, confit cherry tomato, dill, hint of chilli, lobster bisque", price: "54", tag: "GFO" },
+      { name: "Times' Signature Gnocchi", desc: "Butter fried gnocchi with roasted pumpkin, sage cream, touch of Napoli, garlic, parmesan", price: "42", tag: "VG" },
+      { name: "Ricotta and Spinach Agnolotti", desc: "Chives, saffron butter emulsion", price: "42", tag: "VG" },
+      { name: "Carbonara", desc: "Pancetta, free range yolk, spring onion, Grana Padano cheese, with house made linguine", price: "42", tag: "GFO" },
+      { name: "Lamb Ragu Pappardelle", desc: "Slow cooked lamb shoulder in rich San Marzano tomato for 8 hours, chilli, olives, chimichurri, Grana Padano", price: "44", tag: "GFO" },
+      { name: "Mushroom & Truffle Risotto", desc: "Black truffle tapenade, basil, stracciatella, pistachio. +Chicken $4", price: "42", tag: "GF" },
     ],
   },
   {
-    title: "Risottos",
+    title: "Favourite Seasonal Sides",
     items: [
-      { name: "Chicken, Mushroom & Truffle Risotto", desc: "Black truffle tapenade, basil & semi dried tomato, spinach, mascarpone cream, finished with Grana Padano cheese", price: "42", tag: "GF" },
-      { name: "Blue Spanner Crab Risotto", desc: "Crab meat, sautéed scallops, calamari & prawns, fresh fish deglazed with white wine, touch of chilli, confit garlic, roasted cherry tomato", price: "49", tag: "GF" },
+      { name: "Wagyu Roast Potatoes", desc: "Roasted potatoes with rosemary, wagyu tallow, parmesan cheese & black truffle aioli", price: "16", tag: "GF" },
+      { name: "Broccolini", desc: "Fermented chilli butter, almonds", price: "17", tag: "VG, GFO" },
+      { name: "Honey Roasted Pumpkin", desc: "Chilli dressing, coriander yoghurt, salsa verde, fresh herbs, toasted pumpkin seeds, pomegranate", price: "16", tag: "GF" },
+      { name: "Beetroot Salad", desc: "Roasted beetroots, goat cheese, onion, honey balsamic dressing, candied walnut, herbs & pomegranate", price: "18", tag: "VG, VO, GF" },
+      { name: "Brussels Sprouts", desc: "Burnt butter, hot honey glaze, pomegranate, herbs & crispy pancetta", price: "18", tag: "VGO, VO" },
+      { name: "Simple Salad", desc: "Mixed leaves, heirloom tomato, cucumber, radish, onion, verjuice dressing, pecorino", price: "12", tag: "VO, GF" },
+      { name: "Mash", desc: "", price: "12", tag: "GF" },
+      { name: "Chips", desc: "", price: "10" },
     ],
   },
   {
@@ -150,18 +156,19 @@ export const aLaCarteSections: MenuSection[] = [
     subtitle: "Served with chips",
     items: [
       { name: "Wagyu Burger", desc: "", price: "19" },
-      { name: "Grilled Chicken Tenders", desc: "", price: "15" },
+      { name: "Grilled Chicken Tenders", desc: "", price: "16" },
+      { name: "Pork Ribs", desc: "", price: "22" },
       { name: "Linguine", desc: "Butter & Napoli sauce", price: "15" },
     ],
   },
   {
     title: "Desserts",
     items: [
-      { name: "Apple & Frangipane Tart", desc: "Vanilla bean ice cream, orange caramel", price: "22" },
+      { name: "Strawberry & Passion Fruit Pavlova", desc: "Passionfruit, strawberry sorbet, lime & elderflower cream, sumac macerated berries", price: "22" },
       { name: "Sticky Date Pudding", desc: "Salted caramel ice cream, caramel sauce, hazelnut praline and cinnamon crème anglaise", price: "22" },
+      { name: "Times' Signature S'mores", desc: "Layers of melted chocolate, burnt coffee marshmallow, vanilla ice cream, caramel mousse", price: "23" },
       { name: "Crème Brûlée", desc: "Vanilla bean crème brûlée served with vanilla biscotti, mocha cream & fresh berries", price: "22", tag: "GFO" },
-      { name: "Times Signature S'mores", desc: "Layers of melted chocolate and burnt coffee marshmallow, served with vanilla bean ice cream and caramel mousse", price: "22" },
-      { name: "Duo of Ice-Cream or Sorbet", desc: "Choice of two: salted caramel ice cream, vanilla bean ice cream, mango sorbet & berries", price: "14", tag: "GF" },
+      { name: "Duo of Sorbet", desc: "Strawberry / green apple, fresh berries", price: "14", tag: "V, GF" },
       { name: "Desserts Board to Share", desc: "Choice of any three desserts from above", price: "59" },
     ],
   },
@@ -170,7 +177,7 @@ export const aLaCarteSections: MenuSection[] = [
 // ===== LUNCH MENU =====
 export const lunchPackages = {
   subtitle: "Monday to Friday 11:30am – 3:00pm",
-  intro: "Not available on public holidays",
+  intro: "Not available on weekends and public holidays",
   items: [
     { name: "Mains & House Drink Only", desc: "", price: "39" },
     { name: "Two Courses with House Drink", desc: "", price: "49" },
@@ -183,10 +190,10 @@ export const lunchSections: MenuSection[] = [
     title: "Entrée",
     subtitle: "Choose one",
     items: [
-      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, glazed with garlic & herb butter, parmesan cheese, rosemary crisp", price: "", tag: "VG" },
-      { name: "Signature Fried Calamari", desc: "Coated with Asian spiced flour mix, served with Vietnamese dipping sauce and herbs", price: "" },
-      { name: "Mushroom & Truffle Arancini", desc: "Black truffle aioli, parmesan cheese", price: "", tag: "VG" },
-      { name: "Times Bruschetta", desc: "Avocado, Roma tomato, Spanish onion, basil with balsamic glaze, extra virgin olive oil, Grana Padano cheese on grilled sourdough", price: "", tag: "VG, GFO" },
+      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary", price: "", tag: "VG" },
+      { name: "Mushroom & Truffle Arancini", desc: "Black truffle aioli, parmesan cheese, Davidson plum", price: "", tag: "VG" },
+      { name: "Times Bruschetta", desc: "Avocado, Roma tomato, Spanish onion, basil with vincotto, extra virgin olive oil, Grana Padano cheese on grilled sourdough", price: "", tag: "VG, GFO" },
+      { name: "Signature Fried Calamari", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs", price: "", tag: "GFO" },
     ],
   },
   {
@@ -194,22 +201,15 @@ export const lunchSections: MenuSection[] = [
     subtitle: "Choose one",
     items: [
       { name: "House-Made Chicken Parmigiana", desc: "Tender crumbed chicken breast, topped with ham, Napoli sauce, and melted mozzarella & tasty cheese, served with a side of chips & salad", price: "" },
-      { name: "Nasi Goreng", desc: "Indonesian-style fried rice with pork, chicken, prawn, green vegetables, chilli, coriander, bean sprout, fried egg & crispy shallots", price: "", tag: "VGO, GFO" },
-      { name: "O'Connor Eye of Rump 200gm", desc: "Basted in Times' signature basting. Served with the choice of chips or salad", price: "", tag: "GFO" },
-      { name: "Carbonara", desc: "Pancetta, free range egg yolk, spring onion, Grana Padano cheese, black cracked pepper and pecorino with house made linguine", price: "", tag: "GFO" },
-      { name: "Herb Crumbed Snapper", desc: "Tartare sauce, parmesan, lime aioli, lemon, served with the crispy chips", price: "" },
-      { name: "Wagyu Burger", desc: "Mayura wagyu beef patty, lettuce, pickled cucumber, braised onions, tomato, burger sauce & melted cheese on toasted brioche bun, served with chips", price: "", tag: "GFO" },
-      { name: "Flame Grilled Chicken", desc: "Katsu curry sauce, glazed with house-fermented chilli, crispy curry leaves, grilled dukkah bread", price: "", tag: "GFO" },
-      { name: "Veal Cotoletta", desc: "Herb and parmesan crumbed, lightly pan-fried, crispy caper & sage, served with chips and choice of a sauce", price: "" },
+      { name: "Wagyu Rump 200gm", desc: "Basted in Times' signature basting. Served with the choice of chips or salad, and a sauce", price: "", tag: "GFO" },
+      { name: "Wagyu Steak Roll", desc: "Grilled & sliced wagyu rump, lettuce, rocket, onion, melted cheese, dijon mustard, horseradish mayo, chimichurri on a toasted panini bread, served with chips", price: "" },
+      { name: "Herb Crumbed Barramundi", desc: "Lime aioli, lemon, served with crispy chips or salad", price: "" },
       { name: "Seafood Linguine", desc: "Sautéed tiger prawn meat, scallops, calamari, lobster bisque, cherry tomatoes, capers, garlic, touch of chilli", price: "" },
-    ],
-  },
-  {
-    title: "Sauces",
-    items: [
-      { name: "Creamy Mushroom", desc: "", price: "" },
-      { name: "Green Peppercorn", desc: "", price: "" },
-      { name: "Red Wine Jus", desc: "", price: "" },
+      { name: "Nasi Goreng", desc: "Indonesian-style fried rice with pork, chicken, prawn, green vegetables, chilli, coriander, bean sprout, fried egg & crispy shallots", price: "", tag: "VGO, GFO" },
+      { name: "Carbonara", desc: "Pancetta, free range egg yolk, spring onion, Grana Padano cheese, black cracked pepper and pecorino with house made linguine", price: "", tag: "GFO" },
+      { name: "Wagyu Burger", desc: "Mayura wagyu beef patty, lettuce, pickled cucumber, braised onions, tomato, burger sauce & melted cheese on toasted brioche bun, served with chips", price: "", tag: "GFO" },
+      { name: "Flame Grilled Chicken", desc: "Fermented chilli glaze, romesco sauce, crispy kale, pickled chilli & shallot, served with chips", price: "", tag: "GFO" },
+      { name: "Classic Caesar Salad", desc: "Cos lettuce, bacon, anchovies, garlic croutons, parmesan, creamy caesar dressing & soft boiled egg", price: "", tag: "GFO" },
     ],
   },
   {
@@ -217,7 +217,7 @@ export const lunchSections: MenuSection[] = [
     subtitle: "Choose one",
     items: [
       { name: "Sticky Date Pudding", desc: "Salted caramel ice cream, caramel sauce, hazelnut praline and cinnamon crème anglaise", price: "" },
-      { name: "Duo of Ice Cream or Sorbet", desc: "Choice of any two: salted caramel ice cream, vanilla bean ice cream, mango sorbet & berries", price: "", tag: "GF" },
+      { name: "Duo of Sorbet", desc: "Strawberry / green apple, fresh berries", price: "", tag: "V, GF" },
     ],
   },
 ];
@@ -570,11 +570,23 @@ export const wineSections: MenuSection[] = [
   },
 ];
 
+// ===== SHARED SAUCES (used by set menus & chef's table) =====
+export const setMenuSauces = [
+  { name: "Creamy Mushroom", desc: "" },
+  { name: "Green Peppercorn", desc: "" },
+  { name: "Red Wine Jus", desc: "" },
+  { name: "Fermented Chilli", desc: "", tag: "GF" },
+  { name: "Chimichurri", desc: "", tag: "GF" },
+  { name: "Béarnaise", desc: "", tag: "GF" },
+  { name: "Garlic & Herb Butter", desc: "", tag: "GF" },
+  { name: "Aioli", desc: "" },
+];
+
 // ===== CHEF'S TABLE =====
 export const chefsTableSections: MenuSection[] = [
   {
     title: "Times Sharing Experience",
-    subtitle: "$99 per person, designed for 2 people",
+    subtitle: "$119 per person, designed for 2 people",
     items: [],
   },
 ];
@@ -588,9 +600,8 @@ export const chefsTableCourses = [
   },
   {
     course: "Pre-Starter",
-    subtitle: "To share",
     items: [
-      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, glazed with garlic & herb butter, parmesan cheese and rosemary crisp", tag: "VG" },
+      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary", tag: "VG" },
     ],
   },
   {
@@ -598,22 +609,78 @@ export const chefsTableCourses = [
     subtitle: "Your choice of",
     items: [
       { name: "Mushroom & Truffle Arancini", desc: "Black truffle aioli, parmesan cheese, Davidson plum", tag: "VG" },
-      { name: "Signature Fried Calamari", desc: "Coated with Asian spiced flour mix, served with Vietnamese dipping sauce and herbs", tag: "GFO" },
+      { name: "Signature Fried Calamari", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs", tag: "GFO" },
     ],
   },
   {
     course: "Mains",
     subtitle: "To share",
     items: [
-      { name: "Times Carnivore Sharing Board", desc: "Eye of rump (200g), choice of half pork or beef ribs, slow roasted pork belly, flame grilled half chicken. Served with choice of two sides (chips / salad / mash) & choice of a sauce" },
+      { name: "Times Carnivore Sharing Board", desc: "Wagyu rump (200g), choice of half pork or beef ribs, slow roasted pork belly, flame grilled half chicken. Served with choice of two sides (chips / simple salad / mash) & one sauce" },
     ],
+  },
+  {
+    course: "Sauces",
+    items: setMenuSauces,
   },
   {
     course: "Desserts",
     subtitle: "Your choice of",
     items: [
       { name: "Sticky Date Pudding", desc: "Salted caramel ice cream, caramel sauce, hazelnut praline and cinnamon crème anglaise" },
-      { name: "Duo of Ice-Cream or Sorbet", desc: "Choice of two: salted caramel ice cream, vanilla bean ice cream, mango sorbet & berries", tag: "GF" },
+      { name: "Duo of Sorbet", desc: "Strawberry / green apple, fresh berries", tag: "V, GF" },
+    ],
+  },
+];
+
+// ===== CHEF'S TABLE: CHRISTMAS FEAST =====
+export const christmasFeastSections: MenuSection[] = [
+  {
+    title: "Times Sharing Christmas Feast",
+    subtitle: "$149 per person, designed for 2 people",
+    items: [],
+  },
+];
+
+export const christmasFeastCourses = [
+  {
+    course: "On Arrival",
+    items: [
+      { name: "Welcome Drink", desc: "A glass of champagne / white or red wine / beer / soft drink" },
+    ],
+  },
+  {
+    course: "Ocean Feast",
+    subtitle: "To share",
+    items: [
+      { name: "Premium Cold Seafood Platter", desc: "Chef's selection of freshest seafood, ½ lobster, 6 Sydney rock oysters, 4 king prawns, Marie Rose, hot sauce" },
+    ],
+  },
+  {
+    course: "Mains to Share",
+    subtitle: "Your choice of",
+    items: [
+      { name: "O'Connor T-Bone 800gm MB:3+", desc: "150 days grain fed. Recommended: Medium-rare / Medium. Basted in Times' Signature glaze, served with choice of 2 sauces", tag: "GFO" },
+      { name: "Roast Duo of Duck & Pork", desc: "Pot-roasted duck leg & breast, crispy kale, cherry jus, slow roasted pork belly" },
+    ],
+  },
+  {
+    course: "Sides to Share",
+    items: [
+      { name: "Brussels Sprouts", desc: "Burnt butter, hot honey glaze, pomegranate, herbs & crispy pancetta", tag: "VGO, VO" },
+      { name: "Wagyu Roast Potatoes", desc: "Roasted potatoes with rosemary, wagyu tallow, parmesan cheese & black truffle aioli", tag: "GF" },
+    ],
+  },
+  {
+    course: "Sauces",
+    items: setMenuSauces,
+  },
+  {
+    course: "Desserts to Share",
+    subtitle: "Your choice of",
+    items: [
+      { name: "Sticky Date Pudding", desc: "Salted caramel ice cream, caramel sauce, hazelnut praline and cinnamon crème anglaise" },
+      { name: "Strawberry & Passion Fruit Pavlova", desc: "Passionfruit, strawberry sorbet, lime & elderflower cream, sumac macerated berries" },
     ],
   },
 ];
@@ -655,11 +722,12 @@ export const ultimateDiningCourses = [
 ];
 
 // ===== SET MENUS =====
+// Set Menu 1: $95 per person
 export const setMenu1Courses = [
   {
     course: "Pre-Starter",
     items: [
-      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, glazed with garlic & herb butter, parmesan cheese and rosemary crisp", tag: "VG" },
+      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary", tag: "VG" },
     ],
   },
   {
@@ -667,7 +735,7 @@ export const setMenu1Courses = [
     subtitle: "Your choice of",
     items: [
       { name: "Mushroom & Truffle Arancini", desc: "Black truffle aioli, parmesan cheese, Davidson plum", tag: "VG" },
-      { name: "Signature Fried Calamari", desc: "Coated with Asian spiced flour mix, served with Vietnamese dipping sauce and herbs", tag: "GFO" },
+      { name: "Signature Fried Calamari", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs", tag: "GFO" },
       { name: "Hot Chicken Wings", desc: "Smoked black garlic and adobo sauce, furikake", tag: "GFO" },
     ],
   },
@@ -675,38 +743,44 @@ export const setMenu1Courses = [
     course: "Mains",
     subtitle: "Your choice of",
     items: [
-      { name: "O'Connor Striploin 350gm MB:3+", desc: "150 days grain fed. Recommended: Medium-rare/Medium. Basted in Times' Signature glaze, served with the choice of chips or salad and one choice of sauce", tag: "GFO" },
-      { name: "Flame Grilled Chicken", desc: "Katsu curry sauce, glazed with house fermented chilli, crispy leaves, grilled dukkah bread", tag: "GFO" },
-      { name: "Times Signature Gnocchi", desc: "Butter fried gnocchi with roasted pumpkin, sage cream sauce with a touch of Napoli, garlic and parmesan cheese", tag: "VG" },
-      { name: "Crispy Skinned Salmon", desc: "Saffron fregola with prawn meat, scallops, capers, lobster bisque, garlic, chilli, dill, cherry tomatoes, fresh verde", tag: "GFO" },
-      { name: "Harissa Lamb Skewer", desc: "Marinated lamb fillet, onion & red capsicum, lemon & rosemary glaze, finished with pickled onion, saffron yoghurt and fermented tomato seasoning", tag: "GFO" },
-      { name: "Wagyu Rump Cap Skewer", desc: "Rosemary and garlic, onion & capsicum, cooked over the flame grill, finished with peach & apricot glaze, Zhoug", tag: "GFO" },
+      { name: "Wagyu Rump 250gm MB:5+", desc: "450 days grain fed. Recommended: Medium-rare / Medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce", tag: "GFO" },
+      { name: "O'Connor Eye Fillet 200gm MB:2+", desc: "150 days grain fed. Recommended: Medium-rare. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce", tag: "GFO" },
+      { name: "Flame Grilled Chicken", desc: "Fermented chilli glaze, romesco sauce, crispy kale, pickled chilli & shallot, served with chips", tag: "GFO" },
+      { name: "Ricotta and Spinach Agnolotti", desc: "Chives, saffron butter emulsion", tag: "VG" },
+      { name: "Crispy Skin Barramundi", desc: "Baby potato, spinach, shallots, heirloom tomato, laksa sauce, fried curry leaves", tag: "GFO" },
+      { name: "Harissa Lamb Skewer", desc: "Marinated lamb fillet, pickled onion, red capsicum, lemon & rosemary glaze", tag: "GF" },
+      { name: "Pork Belly", desc: "Glazed with Szechuan honey, almond, shallot crumb", tag: "GFO" },
     ],
   },
   {
+    course: "Sauces",
+    items: setMenuSauces,
+  },
+  {
     course: "Desserts",
-    subtitle: "Your choice of",
+    subtitle: "Choose one",
     items: [
       { name: "Sticky Date Pudding", desc: "Salted caramel ice cream, caramel sauce, hazelnut praline and cinnamon crème anglaise" },
-      { name: "Duo of Ice-Cream or Sorbet", desc: "Choice of two: salted caramel ice cream, vanilla bean ice cream, mango sorbet & berries" },
+      { name: "Duo of Sorbet", desc: "Strawberry / green apple, fresh berries", tag: "V, GF" },
     ],
   },
 ];
 
+// Set Menu 2: $110 per person
 export const setMenu2Courses = [
   {
     course: "Pre-Starter",
     items: [
-      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, glazed with garlic & herb butter, parmesan cheese and rosemary crisp", tag: "VG" },
+      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary", tag: "VG" },
     ],
   },
   {
     course: "Starters",
     subtitle: "Your choice of",
     items: [
-      { name: "Mushroom & Truffle Arancini", desc: "Black truffle aioli, parmesan cheese, Davidson plum", tag: "VG" },
-      { name: "Signature Fried Calamari", desc: "Coated with Asian spiced flour mix, served with Vietnamese dipping sauce and herbs", tag: "GFO" },
-      { name: "Times Bruschetta", desc: "Avocado, Roma tomato, Spanish onion, basil with balsamic glaze, extra virgin olive oil, Grana Padano cheese on grilled sourdough", tag: "VG, GFO" },
+      { name: "Fermented Chilli Prawns", desc: "Marinated Emerald tiger prawns & garlic, grilled dukkah bread", tag: "GFO" },
+      { name: "Signature Fried Calamari", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs", tag: "GFO" },
+      { name: "Times Bruschetta", desc: "Avocado, Roma tomato, Spanish onion, basil with vincotto, extra virgin olive oil, Grana Padano cheese on grilled sourdough", tag: "VG, GFO" },
       { name: "Hot Chicken Wings", desc: "Smoked black garlic and adobo sauce, furikake", tag: "GFO" },
     ],
   },
@@ -714,13 +788,17 @@ export const setMenu2Courses = [
     course: "Mains",
     subtitle: "Your choice of",
     items: [
-      { name: "O'Connor Rib-Eye 400gm MB:4+", desc: "150 days grain fed. Recommended: Medium. Basted in Times' Signature glaze, served with the choice of chips or salad and one choice of sauce", tag: "GFO" },
-      { name: "Wagyu Striploin 300g MB:5+", desc: "Grain fed 450 days. Recommended: Medium Rare/Medium. Basted in Times' Signature glaze, served with the choice of chips or salad and one choice of sauce", tag: "GFO" },
-      { name: "Times Signature Gnocchi", desc: "Butter fried gnocchi with roasted pumpkin, sage cream sauce with a touch of Napoli, garlic and parmesan cheese", tag: "VG" },
-      { name: "Crispy Skinned Salmon", desc: "Saffron fregola with prawn meat, scallops, capers, lobster bisque, garlic, chilli, dill, cherry tomatoes, fresh verde", tag: "GFO" },
-      { name: "Pork Belly Skewer", desc: "Slow cooked with Thai basil and chilli, onion, finished over the flame grill with Szechuan honey, almond and shallot crumb", tag: "GFO" },
-      { name: "Flame Grilled Chicken", desc: "Katsu curry sauce, glazed with house fermented chilli, crispy leaves, grilled dukkah bread", tag: "GFO" },
+      { name: "O'Connor Striploin 350g MB:2+", desc: "150 days grain fed. Recommended: Medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce", tag: "GFO" },
+      { name: "O'Connor Eye Fillet 200g MB:2+", desc: "150 days grain fed. Recommended: Medium Rare / Medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce", tag: "GFO" },
+      { name: "Ricotta and Spinach Agnolotti", desc: "Chives, saffron butter emulsion", tag: "VG" },
+      { name: "Crispy Skinned Barramundi", desc: "Baby potato, spinach, shallots, heirloom tomato, laksa sauce, fried curry leaves", tag: "GFO" },
+      { name: "Pork Belly Skewer", desc: "Glazed with Szechuan honey, almond, shallot crumb", tag: "GFO" },
+      { name: "Flame Grilled Chicken", desc: "Fermented chilli glaze, romesco sauce, crispy kale, pickled chilli & shallot, served with chips", tag: "GFO" },
     ],
+  },
+  {
+    course: "Sauces",
+    items: setMenuSauces,
   },
   {
     course: "Desserts",
@@ -731,6 +809,7 @@ export const setMenu2Courses = [
     ],
   },
 ];
+
 
 // ===== BEVERAGE PACKAGES =====
 export const beveragePackages = [
