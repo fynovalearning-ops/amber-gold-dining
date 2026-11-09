@@ -93,10 +93,80 @@ const MenuItemRow = ({ item }: { item: MenuItem }) => (
 );
 
 // ─── Reusable Section Block ──────────────────────────
-type SectionImage = { src: string; zoom?: number; focus?: string };
+type SectionImage = { src: string; alt?: string; zoom?: number; focus?: string };
+
+const SplitLayout = ({
+  images = [],
+  altBase,
+  stretch = true,
+  children,
+}: {
+  images?: SectionImage[];
+  altBase: string;
+  stretch?: boolean;
+  children: React.ReactNode;
+}) => {
+  if (images.length === 0) return <>{children}</>;
+
+  return (
+    <div
+      className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 ${
+        stretch ? "items-stretch" : "items-start lg:items-center"
+      }`}
+    >
+      <div className="lg:col-span-7">{children}</div>
+
+      <div
+        className={`lg:col-span-5 flex flex-col gap-4 ${
+          stretch ? "" : "items-center"
+        }`}
+      >
+        {images.map((img, k) => {
+          const focus = img.focus ?? "50% 50%";
+          return (
+            <div
+              key={k}
+              className={`relative w-full overflow-hidden ${
+                stretch
+                  ? `aspect-[4/3] lg:aspect-auto lg:flex-1 ${
+                      images.length > 1 ? "lg:min-h-[140px]" : "lg:min-h-[260px]"
+                    }`
+                  : images.length > 1
+                  ? "aspect-[4/3]"
+                  : "aspect-[4/5]"
+              }`}
+            >
+              <img
+                src={img.src}
+                alt={img.alt ?? `${altBase} at Times Berwick`}
+                loading="lazy"
+                className={
+                  stretch
+                    ? "absolute inset-0 w-full h-full object-cover"
+                    : "w-full h-full object-cover"
+                }
+                style={{
+                  objectPosition: focus,
+                  transformOrigin: focus,
+                  transform: img.zoom ? `scale(${img.zoom})` : undefined,
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 const alaCarteSectionImages: Record<string, SectionImage[]> = {
   "O’Connor": [{ src: steaksectionImg, zoom: 1.3, focus: "55% 65%" }],
+  "Times Carnivore Sharing Board": [
+    {
+      src: carnivoreBoardImg,
+      alt: "Times Carnivore Sharing Board with eye of rump, ribs, pork belly and chicken",
+    },
+  ],
   "Flamed Grilled Skewers (GF)": [{ src: skewerssectionImg }, { src: skewerssection2Img }],
   "Legendary Ribs": [{ src: ribsectionImg }],
   "Seasonal Favourites": [{ src: favoritesectionImg, zoom: 2.4, focus: "55% 65%" }],
@@ -121,11 +191,14 @@ const MenuSectionBlock = ({
   section: MenuSection;
   index: number;
   images?: Record<string, SectionImage[]>;
-}) => {
-  const sideImages = images[section.title] ?? [];
-
-  const content = (
-    <>
+}) => (
+  <ScrollReveal
+    key={index}
+    delay={Math.min(index * 0.04, 0.15)}
+    className="mb-16 last:mb-0 scroll-mt-36 md:scroll-mt-32"
+    id={section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+  >
+    <SplitLayout images={images[section.title]} altBase={section.title}>
       <h3 className="font-serif text-3xl md:text-4xl mb-1">{section.title}</h3>
       {section.subtitle && (
         <p className="text-primary text-sm italic mb-2">{section.subtitle}</p>
@@ -141,59 +214,10 @@ const MenuSectionBlock = ({
           <MenuItemRow key={j} item={item} />
         ))}
       </div>
-      {section.title === "Times Carnivore Sharing Board" && (
-        <img
-          src={carnivoreBoardImg}
-          alt="Times Carnivore Sharing Board with eye of rump, ribs, pork belly and chicken"
-          loading="lazy"
-          className="mt-4 w-full max-w-sm aspect-[4/3] object-cover rounded-sm shadow-md"
-        />
-      )}
-    </>
-  );
+    </SplitLayout>
+  </ScrollReveal>
+);
 
-  return (
-    <ScrollReveal
-      key={index}
-      delay={Math.min(index * 0.04, 0.15)}
-      className="mb-16 last:mb-0 scroll-mt-36 md:scroll-mt-32"
-      id={section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-    >
-      {sideImages.length > 0 ? (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start lg:items-center">
-          <div className="lg:col-span-7">{content}</div>
-          <div className="lg:col-span-5 flex flex-col items-center gap-4">
-            {sideImages.map((img, k) => {
-              const focus = img.focus ?? "50% 50%";
-              return (
-                <div
-                  key={k}
-                  className={`w-full overflow-hidden ${
-                    sideImages.length > 1 ? "aspect-[4/3]" : "aspect-[4/5]"
-                  }`}
-                >
-                  <img
-                    src={img.src}
-                    alt={`${section.title} at Times Berwick`}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                    style={{
-                      objectPosition: focus,
-                      transformOrigin: focus,
-                      transform: img.zoom ? `scale(${img.zoom})` : undefined,
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ) : (
-        content
-      )}
-    </ScrollReveal>
-  );
-};
 
 // ─── Course Block (for Chef's Table / Set Menus) ─────
 const CourseBlock = ({
@@ -268,54 +292,44 @@ const AlaCarteTab = () => (
       </a>
     </div>
 
-    <ScrollReveal className="mb-16">
-      <h3 className="font-serif text-3xl md:text-4xl mb-1">Raw & Fresh</h3>
-      <div className="gold-divider max-w-16 mt-2 mb-6" />
+    {/* Raw & Fresh + Oysters */}
+<ScrollReveal className="mb-16">
+  <SplitLayout
+  altBase="Raw & Fresh"
+  stretch
+  images={[
+    { src: rawAndColdImg, alt: "Raw and fresh seafood selection at Times Berwick" },
+    { src: sydneyRockOystersImg, alt: "Sydney rock oysters served on ice with red wine shallot dressing and lemon" },
+  ]}
+>
+    <h3 className="font-serif text-3xl md:text-4xl mb-1">Raw & Fresh</h3>
+    <div className="gold-divider max-w-16 mt-2 mb-6" />
 
-      {rawAndColdItems.map((item, j) => (
-        <MenuItemRow key={j} item={item} />
-      ))}
+    {rawAndColdItems.map((item, j) => (
+      <MenuItemRow key={j} item={item} />
+    ))}
 
-      <img
-            src={rawAndColdImg}
-            alt="Sydney rock oysters served on ice with red wine shallot dressing and lemon"
-            loading="lazy"
-            className="mt-4 w-full max-w-sm aspect-[4/3] object-cover rounded-sm shadow-md"
-          />
-
-      {/* Oyster sub-heading */}
-      <div className="mt-6">
-        <h4 className="font-serif text-xl md:text-2xl mb-0.5">Sydney Rock Oysters</h4>
-        <div className="pl-6">
-          {oysterItems.map((item, j) => (
-            <MenuItemRow key={j} item={item} />
-          ))}
-          <img
-            src={sydneyRockOystersImg}
-            alt="Sydney rock oysters served on ice with red wine shallot dressing and lemon"
-            loading="lazy"
-            className="mt-4 w-full max-w-sm aspect-[4/3] object-cover rounded-sm shadow-md"
-          />
-        </div>
-      </div>
-    </ScrollReveal>
-
-    {/* Entrée */}
-    <ScrollReveal className="mb-16">
-      <h3 className="font-serif text-3xl md:text-4xl mb-1">Entrée</h3>
-      <div className="gold-divider max-w-16 mt-2 mb-6" />
-      <div>
-        {toBeginItems.map((item, j) => (
+    <div className="mt-6">
+      <h4 className="font-serif text-xl md:text-2xl mb-0.5">Sydney Rock Oysters</h4>
+      <div className="pl-6">
+        {oysterItems.map((item, j) => (
           <MenuItemRow key={j} item={item} />
         ))}
       </div>
-      <img
-        src={entreesectionImg}
-        alt="Delicious entrée dish"
-        loading="lazy"
-        className="mt-4 w-full max-w-sm aspect-[4/3] object-cover rounded-sm shadow-md"
-      />
-    </ScrollReveal>
+    </div>
+  </SplitLayout>
+</ScrollReveal>
+
+{/* Entrée */}
+<ScrollReveal className="mb-16">
+  <SplitLayout altBase="Entrée" stretch images={[{ src: entreesectionImg, alt: "Delicious entrée dish" }]}>
+    <h3 className="font-serif text-3xl md:text-4xl mb-1">Entrée</h3>
+    <div className="gold-divider max-w-16 mt-2 mb-6" />
+    {toBeginItems.map((item, j) => (
+      <MenuItemRow key={j} item={item} />
+    ))}
+  </SplitLayout>
+</ScrollReveal>
 
     <ScrollReveal className="mb-16">
       <h3 className="font-serif text-3xl md:text-4xl mb-1">TIMES’ SIGNATURE CUTS</h3>
