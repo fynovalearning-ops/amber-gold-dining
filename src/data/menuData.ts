@@ -15,7 +15,9 @@ export type MenuSection = {
 
 // ===== À LA CARTE =====
 export const oysterItems: MenuItem[] = [
-  { name: "Sydney Rock Oysters", desc: "Champagne mignonette. From the east coast of Australia", price: "39 / 73", tag: "GF" },
+  { name: "Sydney Rock Oysters (Half Dozen)", desc: "Champagne mignonette. From the east coast of Australia", price: "39", tag: "GF" },
+  { name: "Sydney Rock Oysters (Dozen)", desc: "Champagne mignonette. From the east coast of Australia", price: "73", tag: "GF" },
+
 ];
 
 export const rawAndColdItems: MenuItem[] = [
@@ -571,15 +573,15 @@ export const wineSections: MenuSection[] = [
 ];
 
 // ===== SHARED SAUCES (used by set menus & chef's table) =====
-export const setMenuSauces = [
-  { name: "Creamy Mushroom", desc: "" },
-  { name: "Green Peppercorn", desc: "" },
-  { name: "Red Wine Jus", desc: "" },
-  { name: "Fermented Chilli", desc: "", tag: "GF" },
-  { name: "Chimichurri", desc: "", tag: "GF" },
-  { name: "Béarnaise", desc: "", tag: "GF" },
-  { name: "Garlic & Herb Butter", desc: "", tag: "GF" },
-  { name: "Aioli", desc: "" },
+export const setMenuSauces: string[] = [
+  "Creamy Mushroom",
+  "Fermented Chilli (GF)",
+  "Chimichurri (GF)",
+  "Bearnaise (GF)",
+  "Green Peppercorn",
+  "Red Wine Jus",
+  "Garlic & Herb Butter (GF)",
+  "Aioli",
 ];
 
 // ===== CHEF'S TABLE =====
@@ -725,43 +727,39 @@ export const ultimateDiningCourses = [
 // Set Menu 1: $95 per person
 export const setMenu1Courses = [
   {
-    course: "Pre-Starter",
+    course: "Pre Starter",
     items: [
-      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary", tag: "VG" },
+      { name: "Garlic & Parmesan Bread", tag: "VG", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary" },
     ],
   },
   {
     course: "Starters",
     subtitle: "Your choice of",
     items: [
-      { name: "Mushroom & Truffle Arancini", desc: "Black truffle aioli, parmesan cheese, Davidson plum", tag: "VG" },
-      { name: "Signature Fried Calamari", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs", tag: "GFO" },
-      { name: "Hot Chicken Wings", desc: "Smoked black garlic and adobo sauce, furikake", tag: "GFO" },
+      { name: "Mushroom & Truffle Arancini", tag: "VG", desc: "Black truffle aioli, parmesan cheese, Davidson plum" },
+      { name: "Signature Fried Calamari", tag: "GFO", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs" },
+      { name: "Hot Chicken Wings", tag: "GFO", desc: "Smoked black garlic and adobo sauce, furikake" },
     ],
   },
   {
     course: "Mains",
     subtitle: "Your choice of",
     items: [
-      { name: "Wagyu Rump 250gm MB:5+", desc: "450 days grain fed. Recommended: Medium-rare / Medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce", tag: "GFO" },
-      { name: "O'Connor Eye Fillet 200gm MB:2+", desc: "150 days grain fed. Recommended: Medium-rare. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce", tag: "GFO" },
-      { name: "Flame Grilled Chicken", desc: "Fermented chilli glaze, romesco sauce, crispy kale, pickled chilli & shallot, served with chips", tag: "GFO" },
-      { name: "Ricotta and Spinach Agnolotti", desc: "Chives, saffron butter emulsion", tag: "VG" },
-      { name: "Crispy Skin Barramundi", desc: "Baby potato, spinach, shallots, heirloom tomato, laksa sauce, fried curry leaves", tag: "GFO" },
-      { name: "Harissa Lamb Skewer", desc: "Marinated lamb fillet, pickled onion, red capsicum, lemon & rosemary glaze", tag: "GF" },
-      { name: "Pork Belly", desc: "Glazed with Szechuan honey, almond, shallot crumb", tag: "GFO" },
+      { name: "Wagyu Rump 250gm MB 5+", tag: "GFO", desc: "450 days grain fed; recommended: medium-rare/medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce" },
+      { name: "O'Connor Eye Fillet 200gm MB 2+", tag: "GFO", desc: "150 days grain fed; recommended: medium-rare. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce" },
+      { name: "Flame Grilled Chicken", tag: "GFO", desc: "Fermented chilli glaze, romesco sauce, crispy kale, pickled chilli & shallot, served with chips" },
+      { name: "Ricotta and Spinach Agnolotti", tag: "VG", desc: "Chives, saffron butter emulsion" },
+      { name: "Crispy Skin Barramundi", tag: "GFO", desc: "Baby potato, spinach, shallots, heirloom tomato, laksa sauce, fried curry leaves" },
+      { name: "Harissa Lamb Skewer", tag: "GF", desc: "Marinated lamb fillet, pickled onion, red capsicum, lemon & rosemary glaze" },
+      { name: "Pork Belly", tag: "GFO", desc: "Glazed with Szechuan honey, almond, shallot crumb" },
     ],
-  },
-  {
-    course: "Sauces",
-    items: setMenuSauces,
   },
   {
     course: "Desserts",
     subtitle: "Choose one",
     items: [
       { name: "Sticky Date Pudding", desc: "Salted caramel ice cream, caramel sauce, hazelnut praline and cinnamon crème anglaise" },
-      { name: "Duo of Sorbet", desc: "Strawberry / green apple, fresh berries", tag: "V, GF" },
+      { name: "Duo of Sorbet", tag: "V, GF", desc: "Strawberry / green apple, fresh berries" },
     ],
   },
 ];
@@ -769,36 +767,32 @@ export const setMenu1Courses = [
 // Set Menu 2: $110 per person
 export const setMenu2Courses = [
   {
-    course: "Pre-Starter",
+    course: "Pre Starter",
     items: [
-      { name: "Garlic & Parmesan Bread", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary", tag: "VG" },
+      { name: "Garlic & Parmesan Bread", tag: "VG", desc: "Fluffy brioche, garlic & herb butter, parmesan, rosemary" },
     ],
   },
   {
     course: "Starters",
     subtitle: "Your choice of",
     items: [
-      { name: "Fermented Chilli Prawns", desc: "Marinated Emerald tiger prawns & garlic, grilled dukkah bread", tag: "GFO" },
-      { name: "Signature Fried Calamari", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs", tag: "GFO" },
-      { name: "Times Bruschetta", desc: "Avocado, Roma tomato, Spanish onion, basil with vincotto, extra virgin olive oil, Grana Padano cheese on grilled sourdough", tag: "VG, GFO" },
-      { name: "Hot Chicken Wings", desc: "Smoked black garlic and adobo sauce, furikake", tag: "GFO" },
+      { name: "Fermented Chilli Prawns", tag: "GFO", desc: "Marinated Emerald tiger prawns & garlic, grilled dukkah bread" },
+      { name: "Signature Fried Calamari", tag: "GFO", desc: "Spiced flour mix, Vietnamese dipping sauce & herbs" },
+      { name: "Times Bruschetta", tag: "VG, GFO", desc: "Avocado, Roma tomato, Spanish onion, basil with vincotto, extra virgin olive oil, Grana Padano cheese on grilled sourdough" },
+      { name: "Hot Chicken Wings", tag: "GFO", desc: "Smoked black garlic and adobo sauce, furikake" },
     ],
   },
   {
     course: "Mains",
     subtitle: "Your choice of",
     items: [
-      { name: "O'Connor Striploin 350g MB:2+", desc: "150 days grain fed. Recommended: Medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce", tag: "GFO" },
-      { name: "O'Connor Eye Fillet 200g MB:2+", desc: "150 days grain fed. Recommended: Medium Rare / Medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce", tag: "GFO" },
-      { name: "Ricotta and Spinach Agnolotti", desc: "Chives, saffron butter emulsion", tag: "VG" },
-      { name: "Crispy Skinned Barramundi", desc: "Baby potato, spinach, shallots, heirloom tomato, laksa sauce, fried curry leaves", tag: "GFO" },
-      { name: "Pork Belly Skewer", desc: "Glazed with Szechuan honey, almond, shallot crumb", tag: "GFO" },
-      { name: "Flame Grilled Chicken", desc: "Fermented chilli glaze, romesco sauce, crispy kale, pickled chilli & shallot, served with chips", tag: "GFO" },
+      { name: "O'Connor Striploin 350g MB 2+", tag: "GFO", desc: "150 days grain fed; recommended: medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce" },
+      { name: "O'Connor Eye Fillet 200g MB 2+", tag: "GFO", desc: "150 days grain fed; recommended: medium rare/medium. Basted in Times' Signature glaze, served with a choice of side (chips / salad) & a choice of sauce" },
+      { name: "Ricotta and Spinach Agnolotti", tag: "VG", desc: "Chives, saffron butter emulsion" },
+      { name: "Crispy Skinned Barramundi", tag: "GFO", desc: "Baby potato, spinach, shallots, heirloom tomato, laksa sauce, fried curry leaves" },
+      { name: "Pork Belly Skewer", tag: "GFO", desc: "Glazed with Szechuan honey, almond, shallot crumb" },
+      { name: "Flame Grilled Chicken", tag: "GFO", desc: "Fermented chilli glaze, romesco sauce, crispy kale, pickled chilli & shallot, served with chips" },
     ],
-  },
-  {
-    course: "Sauces",
-    items: setMenuSauces,
   },
   {
     course: "Desserts",
@@ -809,7 +803,6 @@ export const setMenu2Courses = [
     ],
   },
 ];
-
 
 // ===== BEVERAGE PACKAGES =====
 export const beveragePackages = [

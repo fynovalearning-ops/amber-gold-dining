@@ -26,6 +26,9 @@ import sidessectionImg from "@/assets/sidessection.jpg";
 import skewerssectionImg from "@/assets/skewerssection.jpg";
 import skewerssection2Img from "@/assets/skewersection.jpg";
 import steaksectionImg from "@/assets/steakimagesection.jpg";
+import saucesectionImg from "@/assets/sauce.jpeg";
+import westhomewayusectionImg from "@/assets/wagyuusteak.jpg";
+import tomahawksteakImg from "@/assets/chefs-table-cta.jpg";
 
 import {
   aLaCarteSections,
@@ -42,6 +45,7 @@ import {
   christmasFeastCourses,
   setMenu1Courses,
   setMenu2Courses,
+  setMenuSauces,
   beveragePackages,
   type MenuSection,
   type MenuItem,
@@ -167,6 +171,8 @@ const alaCarteSectionImages: Record<string, SectionImage[]> = {
       alt: "Times Carnivore Sharing Board with eye of rump, ribs, pork belly and chicken",
     },
   ],
+  "Sauces": [{ src: saucesectionImg }],
+  "Westholme Wagyu": [{ src: westhomewayusectionImg }],
   "Flamed Grilled Skewers (GF)": [{ src: skewerssectionImg }, { src: skewerssection2Img }],
   "Legendary Ribs": [{ src: ribsectionImg }],
   "Seasonal Favourites": [{ src: favoritesectionImg, zoom: 2.4, focus: "55% 65%" }],
@@ -174,6 +180,7 @@ const alaCarteSectionImages: Record<string, SectionImage[]> = {
   "Favourite Seasonal Sides": [{ src: sidessectionImg }],
   "For Our Little Guests": [{ src: kidssectionImg }],
   "Desserts": [{ src: desertsectionImg }],
+  "Sharing Steak":[{ src: tomahawksteakImg, alt: "Sharing steak for two people at Times Berwick" }],
 };
 
 const lunchSectionImages: Record<string, SectionImage[]> = {
@@ -219,6 +226,174 @@ const MenuSectionBlock = ({
 );
 
 
+// ─── Decorative curl used beside course headings ─────
+// ─── Decorative curl used beside course headings ─────
+const Curl = ({ flip = false }: { flip?: boolean }) => (
+  <svg
+    viewBox="0 0 40 16"
+    className={`w-8 h-4 text-primary shrink-0 ${flip ? "-scale-x-100" : ""}`}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    aria-hidden="true"
+  >
+    <path d="M2 8c6 0 8-6 14-6s6 8 0 8-5-6 1-6c6 0 9 4 21 4" />
+  </svg>
+);
+
+// ─── Course heading: line — curl TITLE curl — line ───
+const CourseHeading = ({
+  title,
+  subtitle,
+}: {
+  title: string;
+  subtitle?: string;
+}) => (
+  <div className="mt-10 mb-5 text-center">
+    <div className="flex items-center gap-3">
+      <span className="h-px flex-1 bg-primary/70" />
+      <Curl />
+      <h4 className="font-serif text-2xl md:text-3xl uppercase tracking-wide text-foreground">
+        {title}
+      </h4>
+      <Curl flip />
+      <span className="h-px flex-1 bg-primary/70" />
+    </div>
+    {subtitle && (
+      <p className="text-muted-foreground text-sm mt-1">{subtitle}</p>
+    )}
+  </div>
+);
+
+// ─── Centered dish (name + tag, description below) ───
+const SetMenuDish = ({
+  name,
+  tag,
+  desc,
+}: {
+  name: string;
+  tag?: string;
+  desc?: string;
+}) => (
+  <div className="text-center mb-5 last:mb-0">
+    <p className="font-serif font-bold uppercase text-foreground text-base md:text-lg leading-snug">
+      {name}
+      {tag && <span className="ml-1">({tag})</span>}
+    </p>
+    {desc && (
+      <p className="text-muted-foreground text-sm leading-relaxed mt-0.5 max-w-2xl mx-auto">
+        {desc}
+      </p>
+    )}
+  </div>
+);
+
+
+const SauceBox = () => (
+  <div className="my-10 border border-foreground/60 rounded-xl px-5 py-4">
+    <h4 className="font-serif font-bold uppercase text-center text-xl mb-3">
+      Sauces
+    </h4>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-2">
+      {setMenuSauces.map((s) => (
+        <p
+          key={s}
+          className="font-serif font-bold uppercase text-xs md:text-sm text-foreground"
+        >
+          {s}
+        </p>
+      ))}
+    </div>
+  </div>
+);
+
+const DietaryLegend = () => (
+  <div className="mt-12 text-center text-xs md:text-sm text-foreground/80 space-y-2">
+    <p>
+      <strong>V:</strong> Vegan &nbsp; <strong>GF:</strong> Gluten Free &nbsp;
+      <strong>VG:</strong> Vegetarian &nbsp; <strong>GFO:</strong> Gluten Free Option &nbsp;
+      <strong>VO:</strong> Vegan Option
+    </p>
+    <p>
+      <strong>DIETARY REQUIREMENTS:</strong> For dietary requests, please notify
+      our service staff to assist you with menu choices
+    </p>
+  </div>
+);
+
+
+type CourseItem = string | { name: string; desc?: string; tag?: string };
+
+type Course = {
+  course: string;
+  subtitle?: string;
+  items: CourseItem[];
+};
+
+const SetMenuCard = ({
+  title,
+  price,
+  courses,
+}: {
+  title: string;
+  price: number;
+  courses: Course[];
+}) => {
+  const mainsIndex = courses.findIndex(
+    (c) => c.course.toLowerCase() === "mains"
+  );
+
+  return (
+    <ScrollReveal className="mb-16 last:mb-0">
+      <div className="bg-secondary/40 border border-primary/20 rounded-sm px-6 py-10 md:px-12 md:py-14">
+        {/* Header */}
+        <div className="text-center">
+          <p className="text-primary uppercase tracking-[0.3em] text-sm md:text-base">
+            Times Berwick
+          </p>
+          <h3 className="font-serif font-bold uppercase text-3xl md:text-4xl mt-3">
+            {title}
+          </h3>
+          <div className="h-px w-48 bg-foreground/50 mx-auto mt-2" />
+          <p className="font-serif text-2xl md:text-3xl mt-2">
+            (${price} per person)
+          </p>
+        </div>
+
+        {/* Courses */}
+        {courses.map((c, i) => {
+          const isDessert = c.course.toLowerCase() === "desserts";
+          return (
+            <div key={i}>
+              <CourseHeading title={c.course} subtitle={c.subtitle} />
+
+              {isDessert ? (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+    {c.items.map((raw, j) => (
+      <SetMenuDish key={j} {...toItem(raw)} />
+    ))}
+  </div>
+) : (
+  c.items.map((raw, j) => <SetMenuDish key={j} {...toItem(raw)} />)
+)}
+
+              {i === mainsIndex && <SauceBox />}
+            </div>
+          );
+        })}
+
+        <DietaryLegend />
+      </div>
+    </ScrollReveal>
+  );
+};
+
+
+
+const toItem = (raw: CourseItem) =>
+  typeof raw === "string" ? { name: raw } : raw;
+
 // ─── Course Block (for Chef's Table / Set Menus) ─────
 const CourseBlock = ({
   course,
@@ -228,7 +403,7 @@ const CourseBlock = ({
 }: {
   course: string;
   subtitle?: string;
-  items: { name: string; desc?: string; tag?: string }[];
+  items: CourseItem[];
   index: number;
 }) => (
   <ScrollReveal delay={Math.min(index * 0.06, 0.2)} className="mb-12 last:mb-0">
@@ -240,27 +415,32 @@ const CourseBlock = ({
         <p className="text-muted-foreground text-sm italic mb-3">{subtitle}</p>
       )}
       <div className="space-y-4">
-        {items.map((item, j) => (
-          <div key={j}>
-            <p className="text-foreground font-medium font-serif text-lg">
-              {item.name}
-              {item.tag && (
-                <span className="ml-2 text-xs text-primary/70 font-body font-normal">
-                  ({item.tag})
-                </span>
-              )}
-            </p>
-            {item.desc && (
-              <p className="text-muted-foreground text-sm mt-0.5 leading-relaxed">
-                {item.desc}
+        {items.map((raw, j) => {
+          // Normalise plain strings into the object shape
+          const item = typeof raw === "string" ? { name: raw } : raw;
+          return (
+            <div key={j}>
+              <p className="text-foreground font-medium font-serif text-lg">
+                {item.name}
+                {item.tag && (
+                  <span className="ml-2 text-xs text-primary/70 font-body font-normal">
+                    ({item.tag})
+                  </span>
+                )}
               </p>
-            )}
-          </div>
-        ))}
+              {item.desc && (
+                <p className="text-muted-foreground text-sm mt-0.5 leading-relaxed">
+                  {item.desc}
+                </p>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   </ScrollReveal>
 );
+
 
 // ─── Tab Content Components ──────────────────────────
 const AlaCarteTab = () => (
@@ -310,8 +490,10 @@ const AlaCarteTab = () => (
     ))}
 
     <div className="mt-6">
-      <h4 className="font-serif text-xl md:text-2xl mb-0.5">Sydney Rock Oysters</h4>
-      <div className="pl-6">
+      <h4 className="font-serif text-3xl md:text-4xl mb-1">Sydney Rock Oysters</h4>
+      <div className="gold-divider max-w-16 mt-2 mb-6" />
+
+      <div className="">
         {oysterItems.map((item, j) => (
           <MenuItemRow key={j} item={item} />
         ))}
@@ -543,51 +725,8 @@ const ChefsTableTab = () => (
 
 const SetMenusTab = () => (
   <div>
-    {/* Set Menu 1 */}
-    <ScrollReveal className="mb-16">
-      <div className="bg-secondary/40 border border-border/30 rounded-sm p-8 md:p-12">
-        <p className="text-primary uppercase tracking-[0.3em] text-xs mb-3">
-          Option One
-        </p>
-        <h3 className="font-serif text-4xl md:text-5xl mb-2">Set Menu 1</h3>
-        <p className="font-serif text-2xl text-primary mb-6">
-          $95<span className="text-muted-foreground text-base"> per person</span>
-        </p>
-        <div className="gold-divider max-w-24 mb-8" />
-        {setMenu1Courses.map((c, i) => (
-          <CourseBlock
-            key={i}
-            course={c.course}
-            subtitle={c.subtitle}
-            items={c.items}
-            index={i}
-          />
-        ))}
-      </div>
-    </ScrollReveal>
-
-    {/* Set Menu 2 */}
-    <ScrollReveal className="mb-12">
-      <div className="bg-secondary/40 border border-primary/20 rounded-sm p-8 md:p-12">
-        <p className="text-primary uppercase tracking-[0.3em] text-xs mb-3">
-          Premium Option
-        </p>
-        <h3 className="font-serif text-4xl md:text-5xl mb-2">Set Menu 2</h3>
-        <p className="font-serif text-2xl text-primary mb-6">
-          $110<span className="text-muted-foreground text-base"> per person</span>
-        </p>
-        <div className="gold-divider max-w-24 mb-8" />
-        {setMenu2Courses.map((c, i) => (
-          <CourseBlock
-            key={i}
-            course={c.course}
-            subtitle={c.subtitle}
-            items={c.items}
-            index={i}
-          />
-        ))}
-      </div>
-    </ScrollReveal>
+    <SetMenuCard title="Set Menu 1" price={95} courses={setMenu1Courses} />
+    <SetMenuCard title="Set Menu 2" price={110} courses={setMenu2Courses} />
   </div>
 );
 
