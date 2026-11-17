@@ -8,7 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 const Index = lazy(() => import("./pages/Index.tsx"));
 const MenuPage = lazy(() => import("./pages/MenuPage.tsx"));
 const Functions = lazy(() => import("./pages/Functions.tsx"));
-const ChefsTable = lazy(() => import("./pages/ChefsTable.tsx"));
+// const ChefsTable = lazy(() => import("./pages/ChefsTable.tsx"));
 const DateNight = lazy(() => import("./pages/DateNight.tsx"));
 const MothersDay = lazy(() => import("./pages/MothersDay.tsx"));
 const FathersDay = lazy(() => import("./pages/FathersDay.tsx"));
@@ -39,7 +39,7 @@ const App = () => (
             <Route path="/menu" element={<MenuPage />} />
             <Route path="/functions" element={<Functions />} />
             <Route path="/whats-on" element={<WhatsOn />} />
-            <Route path="/chefs-table" element={<ChefsTable />} />
+            {/* <Route path="/chefs-table" element={<ChefsTable />} /> */}
             {isMothersDayActive() && <Route path="/mothers-day" element={<MothersDay />} />}
             {isFathersDayActive() && <Route path="/fathers-day" element={<FathersDay />} />}
 

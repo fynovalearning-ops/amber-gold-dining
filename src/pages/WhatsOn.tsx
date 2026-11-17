@@ -32,7 +32,7 @@ const events: EventCard[] = [
 
     title: "Chef's Table",
     eyebrow: "Seasonal dining",
-    path: "/chefs-table",
+    path: "/menu?tab=chefs-table",
     image: chefsTableHeroImg,
     width: 1920,
     height: 1280,

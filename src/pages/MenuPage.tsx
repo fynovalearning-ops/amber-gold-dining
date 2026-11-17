@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Download } from "lucide-react";
 import Layout from "@/components/Layout";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -50,6 +50,8 @@ import {
   type MenuSection,
   type MenuItem,
 } from "@/data/menuData";
+
+
 
 const TABS = [
   { id: "alacarte", label: "À La Carte" },
@@ -447,7 +449,7 @@ const AlaCarteTab = () => (
   <div>
     <div className="mb-10 flex flex-wrap gap-3">
       <a
-        href="/Tsimes-Berwick-A-La-Carte-Menu.pdf"
+        href="/TIMES_ALA_CARTE_8_October.pdf"
         target="_blank"
         rel="noopener noreferrer"
         download
@@ -535,7 +537,7 @@ const LunchTab = () => (
         Explore Lunch Packages
       </a>
       <a
-        href="/Times-Berwick-Lunch-Menu.pdf"
+        href="/TIMES_BERWICK_Lunch.pdf"
         target="_blank"
         rel="noopener noreferrer"
         download
@@ -743,10 +745,26 @@ const TAB_CONTENT: Record<TabId, () => JSX.Element> = {
 
 // ─── Main Page ───────────────────────────────────────
 const MenuPage = () => {
-  const [activeTab, setActiveTab] = useState<TabId>("alacarte");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const isTabId = (v: string | null): v is TabId =>
+  TABS.some((t) => t.id === v);
+const [activeTab, setActiveTab] = useState<TabId>(
+  isTabId(tabParam) ? tabParam : "alacarte"
+);
   const tabsRef = useRef<HTMLDivElement>(null);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
+
+// Keep the tab in sync if the URL changes (e.g. a link clicked while already on /menu)
+useEffect(() => {
+  if (isTabId(tabParam)) setActiveTab(tabParam);
+}, [tabParam]);
+
+const handleTabChange = (id: TabId) => {
+  setActiveTab(id);
+  setSearchParams({ tab: id }, { replace: true });
+};
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -772,6 +790,16 @@ const MenuPage = () => {
       });
     }
   }, [activeTab]);
+
+  useEffect(() => {
+  if (isTabId(tabParam)) {
+    document
+      .getElementById("tabs-sentinel")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  // only on first load
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   const TabContent = TAB_CONTENT[activeTab];
 
@@ -816,7 +844,7 @@ const MenuPage = () => {
               <button
                 key={tab.id}
                 data-tab={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabChange(tab.id)}
                 className={`relative px-3 py-3.5 min-h-[48px] text-xs uppercase tracking-[0.12em] font-medium transition-all duration-300 rounded-sm ${
                   activeTab === tab.id
                     ? "text-primary bg-primary/10 border border-primary/30"
@@ -837,7 +865,7 @@ const MenuPage = () => {
               <button
                 key={tab.id}
                 data-tab={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabChange(tab.id)}
                 className={`relative whitespace-nowrap px-5 py-4 text-sm uppercase tracking-[0.15em] font-medium transition-all duration-300 shrink-0 ${
                   activeTab === tab.id
                     ? "text-primary"
