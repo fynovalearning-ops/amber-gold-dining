@@ -11,24 +11,31 @@ import oystersFaqImg from "@/assets/oysters-faq.jpg";
 import flameGrilledSkewersImg from "@/assets/flame-grilled-skewers.jpg";
 import sydneyRockOystersImg from "@/assets/oystersimage.jpg";
 import carnivoreBoardImg from "@/assets/carnivore-board-new.jpg";
-import rawAndColdImg from "@/assets/rawandfreshsection.jpg";
-import entreesectionImg from "@/assets/entreesection.jpg";
-import desertsectionImg from "@/assets/desertsection.jpg";
-import favoritesectionImg from "@/assets/favoritesections.jpg";
+import rawAndColdImg from "@/assets/TIMESNOV_WEB_052.jpg";
+import entreesectionImg from "@/assets/TIMESNOV_WEB_006.jpg";
+import entreesection2Img from "@/assets/TIMESNOV_WEB_012.jpg";
+import desertsectionImg from "@/assets/timesberwickdeserts.jpeg";
+import desertsection2Img from "@/assets/TIMESNOV_WEB_058.jpg";
+import favoritesectionImg from "@/assets/TIMESNOV_WEB_047.jpg";
 import kidssectionImg from "@/assets/kidssection.jpg";
 import lunchsectionImg from "@/assets/lunchsectionimage.jpg";
 import lunchsection2Img from "@/assets/lunchsection.jpg";
 import pastarisotosectionImg from "@/assets/pastarisotosection.jpg";
 import pasatarisotosection2Img from "@/assets/pastarisotosectionimage.jpg";
+import pastarisotosection3Img from "@/assets/TIMESNOV_WEB_041.jpg";
 import pastasectionImg from "@/assets/pastasection.jpg";
 import ribsectionImg from "@/assets/ribssections.jpg";
 import sidessectionImg from "@/assets/sidessection.jpg";
+import sidessectionImg2 from "@/assets/TIMESNOV_WEB_018.jpg";
 import skewerssectionImg from "@/assets/skewerssection.jpg";
 import skewerssection2Img from "@/assets/skewersection.jpg";
+import skewersection3Img from "@/assets/TIMESNOV_WEB_028.jpg";
 import steaksectionImg from "@/assets/steakimagesection.jpg";
 import saucesectionImg from "@/assets/sauce.jpeg";
 import westhomewayusectionImg from "@/assets/wagyuusteak.jpg";
 import tomahawksteakImg from "@/assets/chefs-table-cta.jpg";
+import sharingsteakImg from "@/assets/TIMESNOV_WEB_073.jpg";
+import dryagesectionImg from "@/assets/TIMESNOV_WEB_077.jpg";
 
 import {
   aLaCarteSections,
@@ -173,16 +180,18 @@ const alaCarteSectionImages: Record<string, SectionImage[]> = {
       alt: "Times Carnivore Sharing Board with eye of rump, ribs, pork belly and chicken",
     },
   ],
-  "Sauces": [{ src: saucesectionImg }],
+  "Favorites": [{ src: favoritesectionImg, zoom: 2.4, focus: "55% 65%" }],
+  // "Sauces": [{ src: saucesectionImg }],
   "Westholme Wagyu": [{ src: westhomewayusectionImg }],
-  "Flamed Grilled Skewers (GF)": [{ src: skewerssectionImg }, { src: skewerssection2Img }],
+  "Flamed Grilled Skewers (GF)": [{ src: skewerssection2Img }, { src: skewersection3Img }],
   "Legendary Ribs": [{ src: ribsectionImg }],
-  "Seasonal Favourites": [{ src: favoritesectionImg, zoom: 2.4, focus: "55% 65%" }],
-  "Pastas & Risottos": [{ src: pastarisotosectionImg }, { src: pastasectionImg }],
-  "Favourite Seasonal Sides": [{ src: sidessectionImg }],
+  "Seasonal Favourites": [{ src: favoritesectionImg,  }],
+  "Pastas & Risottos": [ { src: pastarisotosection3Img }, { src: pasatarisotosection2Img }],
+  "Favourite Seasonal Sides": [{ src: sidessectionImg }, { src: sidessectionImg2 }],
   "For Our Little Guests": [{ src: kidssectionImg }],
-  "Desserts": [{ src: desertsectionImg }],
-  "Sharing Steak":[{ src: tomahawksteakImg, alt: "Sharing steak for two people at Times Berwick" }],
+  "Desserts": [{ src: desertsectionImg }, { src: desertsection2Img }],
+  "Sharing Steak": [{ src: sharingsteakImg, alt: "Sharing steak for two people at Times Berwick" }],
+  "O'Connor Dry Aged": [{ src: dryagesectionImg, alt: "Dry aged steak at Times Berwick", zoom:1.2, focus: "55% 65%" }],
 };
 
 const lunchSectionImages: Record<string, SectionImage[]> = {
@@ -480,7 +489,7 @@ const AlaCarteTab = () => (
   altBase="Raw & Fresh"
   stretch
   images={[
-    { src: rawAndColdImg, alt: "Raw and fresh seafood selection at Times Berwick" },
+    { src: rawAndColdImg, alt: "Raw and fresh seafood selection at Times Berwick", zoom: 1.2, focus: "55% 65%" },
     { src: sydneyRockOystersImg, alt: "Sydney rock oysters served on ice with red wine shallot dressing and lemon" },
   ]}
 >
@@ -506,7 +515,7 @@ const AlaCarteTab = () => (
 
 {/* Entrée */}
 <ScrollReveal className="mb-16">
-  <SplitLayout altBase="Entrée" stretch images={[{ src: entreesectionImg, alt: "Delicious entrée dish" }]}>
+  <SplitLayout altBase="Entrée" stretch images={[{ src: entreesection2Img, alt: "Delicious entrée dish" }]}>
     <h3 className="font-serif text-3xl md:text-4xl mb-1">Entrée</h3>
     <div className="gold-divider max-w-16 mt-2 mb-6" />
     {toBeginItems.map((item, j) => (
