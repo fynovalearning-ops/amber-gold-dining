@@ -79,98 +79,125 @@ const faqs = [
   { q: "Is your menu seasonal?", a: "Our menu evolves with seasonal produce to ensure we serve the freshest ingredients and the best dining experience possible." },
 ];
 
-// ─── Reusable Menu Item Row ──────────────────────────
+// ─── Full-width helper for non-panel content (buttons, intros) ───
+const Container = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <div className={`max-w-7xl mx-auto px-6 ${className}`}>{children}</div>
+);
+
+// ─── Menu item: name ——— price, description below ───
 const MenuItemRow = ({ item }: { item: MenuItem }) => (
-  <div className="menu-item-hover flex justify-between items-baseline py-4 border-b border-border/40">
-    <div className="pr-4 flex-1 min-w-0">
+  <div className="py-3">
+    <div className="flex items-center gap-4">
       <span className="text-foreground font-medium">
         {item.name}
-        {item.tag && (
-          <span className="ml-2 text-xs text-primary/70 font-normal tracking-wide">
-            ({item.tag})
-          </span>
-        )}
+        {item.tag && <span className="ml-2 text-xs text-primary/70 font-normal tracking-wide">({item.tag})</span>}
       </span>
-      {item.desc && (
-        <span className="block text-muted-foreground text-sm mt-0.5 leading-relaxed italic">
-          {item.desc}
-        </span>
-      )}
+      <span className="flex-1 h-px bg-primary/30" />
+      {item.price && <span className="text-foreground shrink-0">{item.price}</span>}
     </div>
-    {item.price && (
-      <span className="text-primary font-serif text-lg shrink-0">
-        ${item.price}
-      </span>
-    )}
+    {item.desc && <p className="text-foreground/80 text-sm mt-1.5 leading-relaxed">{item.desc}</p>}
   </div>
 );
 
-// ─── Reusable Section Block ──────────────────────────
+// ─── Half text / half image panel ───
 type SectionImage = { src: string; alt?: string; zoom?: number; focus?: string };
 
-const SplitLayout = ({
+const MenuPanel = ({
+  id,
+  title,
+  subtitle,
+  intro,
   images = [],
   altBase,
-  stretch = true,
+  reverse = false,
   children,
 }: {
+  id?: string;
+  title: string;
+  subtitle?: string;
+  intro?: string;
   images?: SectionImage[];
-  altBase: string;
-  stretch?: boolean;
+  altBase?: string;
+  reverse?: boolean;
   children: React.ReactNode;
 }) => {
-  if (images.length === 0) return <>{children}</>;
+  const hasImages = images.length > 0;
 
   return (
-    <div
-      className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 ${
-        stretch ? "items-stretch" : "items-start lg:items-center"
-      }`}
-    >
-      <div className="lg:col-span-7">{children}</div>
+    <ScrollReveal id={id} className="scroll-mt-36 md:scroll-mt-32">
+      <div className={`grid grid-cols-1 ${hasImages ? "lg:grid-cols-2" : ""}`}>
+        {/* Text cell */}
+        <div
+  className={`bg-background flex justify-center items-center px-6 py-14 md:px-12 lg:px-16 lg:py-20 lg:min-h-[560px] ${
+    reverse ? "lg:order-2" : ""
+  }`}
+>
+          <div className="w-full max-w-xl">
+            <h3 className="font-serif text-4xl md:text-5xl text-center">{title}</h3>
+            {subtitle && <p className="text-primary text-sm italic text-center mt-3">{subtitle}</p>}
+            {intro && (
+              <p className="text-muted-foreground text-sm leading-relaxed text-center mt-3 max-w-md mx-auto">
+                {intro}
+              </p>
+            )}
+            <div className="dotted-divider mx-auto my-8" />
+            {children}
+          </div>
+        </div>
 
-      <div
-        className={`lg:col-span-5 flex flex-col gap-4 ${
-          stretch ? "" : "items-center"
-        }`}
-      >
-        {images.map((img, k) => {
-          const focus = img.focus ?? "50% 50%";
-          return (
-            <div
-              key={k}
-              className={`relative w-full overflow-hidden ${
-                stretch
-                  ? `aspect-[4/3] lg:aspect-auto lg:flex-1 ${
-                      images.length > 1 ? "lg:min-h-[140px]" : "lg:min-h-[260px]"
-                    }`
-                  : images.length > 1
-                  ? "aspect-[4/3]"
-                  : "aspect-[4/5]"
-              }`}
-            >
-              <img
-                src={img.src}
-                alt={img.alt ?? `${altBase} at Times Berwick`}
-                loading="lazy"
-                className={
-                  stretch
-                    ? "absolute inset-0 w-full h-full object-cover"
-                    : "w-full h-full object-cover"
-                }
-                style={{
-                  objectPosition: focus,
-                  transformOrigin: focus,
-                  transform: img.zoom ? `scale(${img.zoom})` : undefined,
-                }}
-              />
-            </div>
-          );
-        })}
-      </div>
+{/* Image cell: matches the text panel height; multiple images sit side by side */}
+{hasImages && (
+  <div className={`relative ${reverse ? "lg:order-1" : ""}`}>
+    <div className="flex flex-col lg:flex-row lg:absolute lg:inset-0">
+      {images.map((img, k) => {
+        const focus = img.focus ?? "50% 50%";
+        return (
+          <div key={k} className="relative overflow-hidden aspect-[4/3] lg:aspect-auto lg:flex-1">
+            <img
+              src={img.src}
+              alt={img.alt ?? `${altBase ?? title} at Times Berwick`}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                objectPosition: focus,
+                transformOrigin: focus,
+                transform: img.zoom ? `scale(${img.zoom})` : undefined,
+              }}
+            />
+          </div>
+        );
+      })}
     </div>
+  </div>
+)}
+      </div>
+    </ScrollReveal>
   );
 };
+
+// ─── Data-driven section → panel ───
+const MenuSectionBlock = ({
+  section,
+  index,
+  images = alaCarteSectionImages,
+}: {
+  section: MenuSection;
+  index: number;
+  images?: Record<string, SectionImage[]>;
+}) => (
+  <MenuPanel
+    id={section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+    title={section.title}
+    subtitle={section.subtitle}
+    intro={section.intro}
+    images={images[section.title]}
+    reverse={index % 2 === 1}
+  >
+    {section.items.map((item, j) => (
+      <MenuItemRow key={j} item={item} />
+    ))}
+  </MenuPanel>
+);
 
 const alaCarteSectionImages: Record<string, SectionImage[]> = {
   "O’Connor": [{ src: steaksectionImg, zoom: 1.3, focus: "55% 65%" }],
@@ -188,7 +215,7 @@ const alaCarteSectionImages: Record<string, SectionImage[]> = {
   "Seasonal Favourites": [{ src: favoritesectionImg,  }],
   "Pastas & Risottos": [ { src: pastarisotosection3Img }, { src: pasatarisotosection2Img }],
   "Favourite Seasonal Sides": [{ src: sidessectionImg }, { src: sidessectionImg2 }],
-  "For Our Little Guests": [{ src: kidssectionImg }],
+  "For Our Little Guests": [{ src: kidssectionImg, focus: "50% 70%" }],
   "Desserts": [{ src: desertsectionImg }, { src: desertsection2Img }],
   "Sharing Steak": [{ src: sharingsteakImg, alt: "Sharing steak for two people at Times Berwick" }],
   "O'Connor Dry Aged": [{ src: dryagesectionImg, alt: "Dry aged steak at Times Berwick", zoom:1.2, focus: "55% 65%" }],
@@ -199,43 +226,6 @@ const lunchSectionImages: Record<string, SectionImage[]> = {
   "Mains": [{ src: lunchsection2Img }],
   "Desserts": [{ src: desertsectionImg }],
 };
-
-// ─── Reusable Section Block ──────────────────────────
-const MenuSectionBlock = ({
-  section,
-  index,
-  images = alaCarteSectionImages,
-}: {
-  section: MenuSection;
-  index: number;
-  images?: Record<string, SectionImage[]>;
-}) => (
-  <ScrollReveal
-    key={index}
-    delay={Math.min(index * 0.04, 0.15)}
-    className="mb-16 last:mb-0 scroll-mt-36 md:scroll-mt-32"
-    id={section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-  >
-    <SplitLayout images={images[section.title]} altBase={section.title}>
-      <h3 className="font-serif text-3xl md:text-4xl mb-1">{section.title}</h3>
-      {section.subtitle && (
-        <p className="text-primary text-sm italic mb-2">{section.subtitle}</p>
-      )}
-      {section.intro && (
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4 max-w-2xl">
-          {section.intro}
-        </p>
-      )}
-      <div className="gold-divider max-w-16 mt-2 mb-6" />
-      <div>
-        {section.items.map((item, j) => (
-          <MenuItemRow key={j} item={item} />
-        ))}
-      </div>
-    </SplitLayout>
-  </ScrollReveal>
-);
-
 
 // ─── Decorative curl used beside course headings ─────
 // ─── Decorative curl used beside course headings ─────
@@ -456,7 +446,7 @@ const CourseBlock = ({
 // ─── Tab Content Components ──────────────────────────
 const AlaCarteTab = () => (
   <div>
-    <div className="mb-10 flex flex-wrap gap-3">
+    <Container className="mb-12 flex flex-wrap gap-3">
       <a
         href="/TIMES_ALA_CARTE_8_October.pdf"
         target="_blank"
@@ -481,64 +471,60 @@ const AlaCarteTab = () => (
       >
         Order Online
       </a>
-    </div>
+    </Container>
 
     {/* Raw & Fresh + Oysters */}
-<ScrollReveal className="mb-16">
-  <SplitLayout
-  altBase="Raw & Fresh"
-  stretch
-  images={[
-    { src: rawAndColdImg, alt: "Raw and fresh seafood selection at Times Berwick", zoom: 1.2, focus: "55% 65%" },
-    { src: sydneyRockOystersImg, alt: "Sydney rock oysters served on ice with red wine shallot dressing and lemon" },
-  ]}
->
-    <h3 className="font-serif text-3xl md:text-4xl mb-1">Raw & Fresh</h3>
-    <div className="gold-divider max-w-16 mt-2 mb-6" />
-
-    {rawAndColdItems.map((item, j) => (
-      <MenuItemRow key={j} item={item} />
-    ))}
-
-    <div className="mt-6">
-      <h4 className="font-serif text-3xl md:text-4xl mb-1">Sydney Rock Oysters</h4>
-      <div className="gold-divider max-w-16 mt-2 mb-6" />
-
-      <div className="">
-        {oysterItems.map((item, j) => (
-          <MenuItemRow key={j} item={item} />
-        ))}
-      </div>
-    </div>
-  </SplitLayout>
-</ScrollReveal>
-
-{/* Entrée */}
-<ScrollReveal className="mb-16">
-  <SplitLayout altBase="Entrée" stretch images={[{ src: entreesection2Img, alt: "Delicious entrée dish" }]}>
-    <h3 className="font-serif text-3xl md:text-4xl mb-1">Entrée</h3>
-    <div className="gold-divider max-w-16 mt-2 mb-6" />
-    {toBeginItems.map((item, j) => (
-      <MenuItemRow key={j} item={item} />
-    ))}
-  </SplitLayout>
-</ScrollReveal>
-
-    <ScrollReveal className="mb-16">
-      <h3 className="font-serif text-3xl md:text-4xl mb-1">TIMES’ SIGNATURE CUTS</h3>
-      <span className="text-muted-foreground text-sm italic mb-2 block">All of our steaks are glazed with our Times Signature umami basting for a flavorful finish.</span>
-      <span className="text-muted-foreground text-sm italic mb-2 block">Served with your choice of one side (chips / simple salad / mash)</span>
-      <div className="gold-divider max-w-16 mt-2 mb-6" />
-      {aLaCarteSections.map((section, i) => (
-        <MenuSectionBlock key={i} section={section} index={i} />
+    <MenuPanel
+      id="raw-fresh"
+      title="Raw & Fresh"
+      images={[
+        { src: rawAndColdImg, alt: "Raw and fresh seafood selection at Times Berwick", zoom: 1.8, focus: "35% 65%" },
+        { src: sydneyRockOystersImg, alt: "Sydney rock oysters served on ice" },
+      ]}
+    >
+      {rawAndColdItems.map((item, j) => (
+        <MenuItemRow key={j} item={item} />
       ))}
-    </ScrollReveal>
+      <h4 className="font-serif text-3xl md:text-4xl text-center mt-14">Sydney Rock Oysters</h4>
+      <div className="dotted-divider mx-auto my-6" />
+      {oysterItems.map((item, j) => (
+        <MenuItemRow key={j} item={item} />
+      ))}
+    </MenuPanel>
+
+    {/* Entrée */}
+    <MenuPanel
+      id="entree"
+      title="Entrée"
+      reverse
+      images={[{ src: entreesectionImg, alt: "Delicious entrée dish" }]}
+    >
+      {toBeginItems.map((item, j) => (
+        <MenuItemRow key={j} item={item} />
+      ))}
+    </MenuPanel>
+
+    {/* Signature cuts heading band */}
+    <div className="bg-background text-center px-6 pt-20 pb-6 max-w-3xl mx-auto">
+      <h3 className="font-serif text-4xl md:text-5xl">TIMES’ SIGNATURE CUTS</h3>
+      <p className="text-muted-foreground text-sm italic mt-4">
+        All of our steaks are glazed with our Times Signature umami basting for a flavorful finish.
+      </p>
+      <p className="text-muted-foreground text-sm italic mt-1">
+        Served with your choice of one side (chips / simple salad / mash)
+      </p>
+      <div className="dotted-divider mx-auto mt-8" />
+    </div>
+
+    {aLaCarteSections.map((section, i) => (
+      <MenuSectionBlock key={i} section={section} index={i} />
+    ))}
   </div>
 );
 
 const LunchTab = () => (
   <div>
-    <div className="mb-10 flex flex-wrap gap-3">
+    <Container className="mb-12 flex flex-wrap gap-3">
       <a
         href="#lunch-packages"
         className="inline-flex items-center gap-2 border border-primary text-primary px-6 py-3 text-sm uppercase tracking-[0.2em] hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
@@ -555,14 +541,14 @@ const LunchTab = () => (
         <Download size={16} />
         Download Lunch Menu PDF
       </a>
-    </div>
+    </Container>
 
     {lunchSections.map((section, i) => (
-  <MenuSectionBlock key={i} section={section} index={i} images={lunchSectionImages} />
-))}
+      <MenuSectionBlock key={i} section={section} index={i} images={lunchSectionImages} />
+    ))}
 
-    {/* Lunch Packages — boxed section at the end */}
-    <ScrollReveal className="mt-16 scroll-mt-36 md:scroll-mt-32" id="lunch-packages">
+    <Container>
+      <ScrollReveal className="mt-16 scroll-mt-36 md:scroll-mt-32 max-w-5xl" id="lunch-packages">
       <div className="bg-secondary/40 border border-primary/20 rounded-sm p-8 md:p-12">
         <p className="text-primary uppercase tracking-[0.3em] text-xs mb-3">
           Lunch Packages
@@ -586,13 +572,14 @@ const LunchTab = () => (
         </div>
       </div>
     </ScrollReveal>
+    </Container>
   </div>
 );
 
 const CocktailsTab = () => (
   <div>
-    {/* Hero image with intro */}
-    <div className="relative rounded-sm overflow-hidden mb-16 -mx-2">
+    <Container>
+      <div className="relative rounded-sm overflow-hidden mb-16">
       <img
         src={cocktailsHeroImg}
         alt="Cocktails at Times Berwick"
@@ -608,6 +595,7 @@ const CocktailsTab = () => (
         </div>
       </div>
     </div>
+    </Container>
 
     {cocktailSections.map((section, i) => (
       <>
@@ -623,8 +611,8 @@ const DrinksTab = () => (
       <MenuSectionBlock key={i} section={section} index={i} />
     ))}
 
-    {/* Beverage Packages */}
-    <ScrollReveal delay={0.1} className="mt-20">
+    <Container>
+      <ScrollReveal delay={0.1} className="mt-20">
       <h3 className="font-serif text-3xl md:text-4xl mb-2">
         Beverage packages
       </h3>
@@ -655,12 +643,14 @@ const DrinksTab = () => (
         ))}
       </div>
     </ScrollReveal>
+    </Container>
   </div>
 );
 
 const WineTab = () => (
   <div>
-    <ScrollReveal className="mb-10">
+    <Container>
+      <ScrollReveal className="mb-10">
       <p className="text-muted-foreground leading-relaxed max-w-2xl text-sm">
         Our carefully curated wine collection celebrates both the finest Australian
         vineyards and prestigious international wine houses. Whether you're in
@@ -672,6 +662,7 @@ const WineTab = () => (
         Prices shown as Glass / Bottle where available
       </p>
     </ScrollReveal>
+    </Container>
     {wineSections.map((section, i) => (
       <MenuSectionBlock key={i} section={section} index={i} />
     ))}
@@ -740,6 +731,8 @@ const SetMenusTab = () => (
     <SetMenuCard title="Set Menu 2" price={110} courses={setMenu2Courses} />
   </div>
 );
+
+const FULL_BLEED_TABS: TabId[] = ["alacarte", "lunch", "cocktails", "drinks", "wine"];
 
 // ─── Tab Content Map ─────────────────────────────────
 const TAB_CONTENT: Record<TabId, () => JSX.Element> = {
@@ -895,23 +888,27 @@ const handleTabChange = (id: TabId) => {
         </div>
 
         {/* Tab Content */}
-        <section className="py-12 lg:py-24">
-          <div className="max-w-7xl mx-auto px-6">
+<section className="py-12 lg:py-24">
+  <AnimatePresence mode="wait">
+    <motion.div
+      key={activeTab}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+    >
+      {FULL_BLEED_TABS.includes(activeTab) ? (
+        <TabContent />
+      ) : (
+        <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-5xl">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                <TabContent />
-              </motion.div>
-            </AnimatePresence>
+            <TabContent />
           </div>
-          </div>
-        </section>
+        </div>
+      )}
+    </motion.div>
+  </AnimatePresence>
+</section>
 
         {/* Booking CTA */}
         <ScrollReveal>
